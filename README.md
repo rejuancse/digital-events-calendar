@@ -1,4 +1,5 @@
 === event-calender ===
+
 Contributors: Rejuan Ahamed
 Tags: Wordpress Event Calender, Event Calender.
 Requires at least: 4.0
@@ -15,24 +16,12 @@ If you want to build event calender in your wordpress theme with verious demo, e
 
 = Features =
 
-Here are the most notable features of WP Mega Menu plugin. If you need any further information, please feel free to contact us. Below are the best offerings of WP Mega Menu.
-
-  * Drag and drop menu builder panel.
-  * Widgets in menu.
-  * Multiple themes/skins option.
-  * Export/import themes
-  * Branding in logo
-  * Social icons
-  * Search bar in menu
-  * Menu labelling/badge, ex: hot, new, etc.
-  * Dashicons and Font Awesome icon support
-  * Stretch menu
-  * Responsive support
-  * Mobile menu support
-  * Menu background image
-  * Unlimited colors
-  * Google Fonts
-  * Unlimited options
+1. Demo
+2. Global Settings
+3. Multi event list
+4. Event with map location.
+5. Single event.
+6. Calender for event with short description.
 
 
 Please let us know your feedback, if you think something can be more awesome in this plugin, we will love to add.
@@ -55,14 +44,6 @@ A. Sure, you can use your existing WordPress theme with event calender.
 = Q. Where can I report a bug? =
 A. Found a bug? Please let us know by posting on the support section of this plugin on WordPress plugin directory or directly on our support mail: rejuancse@gmail.com
 
-
-== Screenshots ==
-1. Demo
-2. Global Settings
-3. Multi event list
-4. Event with map location.
-5. Single event.
-6. Calender for event with short description.
 
 == Changelog ==
 
