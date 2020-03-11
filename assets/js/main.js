@@ -1,45 +1,56 @@
 /* -------------------------------------  
-1. Calendar Next Month
+|        Calendar Next Month
 ---------------------------------------- */
-function getNextMonth(){
-    $(".upcoming-events").addClass("loading-calendar");
-    $('.calendar').addClass('spinner');
-    var nextmonth = $("#nextmonth").attr("month");  
-    var nextyear  = $("#nextmonth").attr("year");
-    $.ajax({
+function getNextMonth() {
+    jQuery(".upcoming-events").addClass("loading-calendar");
+    jQuery('.calendar').addClass('spinner');
+    var nextmonth = jQuery("#nextmonth").attr("month");  
+    var nextyear  = jQuery("#nextmonth").attr("year");
+    jQuery.ajax(
+    {
         type: 'POST',
         url: ajax_objects.ajaxurl,
-        data: { "action": "eventco_displaynextmonth", "nextmonth":nextmonth, "nextyear":nextyear, _nonce : ajax_objects.ajax_nonce},
+        data: { 
+            "action": "ecalendar_displaynextmonth", 
+            "nextmonth": nextmonth, 
+            "nextyear": nextyear, 
+            _nonce : ajax_objects.ajax_nonce
+        },
         success: function(data){
            $(".upcoming-events").removeClass("loading-calendar");
            $('.calendar').removeClass('spinner');
            $("#calendar_area").html(data);
         }
-    }); 
+    } ); 
 }
 
 /* -------------------------------------  
-2. Calendar Prev Month
+|           Calendar Prev Month
 ---------------------------------------- */
-function getPrevMonth(){
-    $(".upcoming-events").addClass("loading-calendar");
-    $('.calendar').addClass('spinner');
-    var prevmonth = $("#premonth").attr("month");  
-    var prevyear  = $("#premonth").attr("year"); 
-    $.ajax({
+function getPrevMonth() {
+    jQuery(".upcoming-events").addClass("loading-calendar");
+    jQuery('.calendar').addClass('spinner');
+    var prevmonth = jQuery("#premonth").attr("month");  
+    var prevyear  = jQuery("#premonth").attr("year"); 
+    jQuery.ajax(
+    {
         type: 'POST',
         url: ajax_objects.ajaxurl,
-        data: { "action": "eventco_displaynextmonth","nextmonth":prevmonth,"nextyear":prevyear, _nonce : ajax_objects.ajax_nonce},
+        data: { 
+            "action": "ecalendar_displaynextmonth",
+            "nextmonth": prevmonth,
+            "nextyear": prevyear, 
+            _nonce : ajax_objects.ajax_nonce
+        },
         success: function(data){
-            $(".upcoming-events").removeClass("loading-calendar");
-            $('.calendar').removeClass('spinner');
-            $("#calendar_area").html(data);
+            jQuery(".upcoming-events").removeClass("loading-calendar");
+            jQuery('.calendar').removeClass('spinner');
+            jQuery("#calendar_area").html(data);
         }
-    }); 
+    } ); 
 }
 
-// console.log('AA: Calendar', getPrevMonth());
 
-jQuery(document).ready(function($){'use strict';
+jQuery(document).ready(function($){ 'use strict';
 
 });

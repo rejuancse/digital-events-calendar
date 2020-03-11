@@ -7,37 +7,55 @@
 */
 
 
-body.page-template-event-calender-php {
+
+body {
+    background-color: #e8e3e3 !important;
+}
+/*body.page-template-event-calender-php {
     background: #f5f5f5;
-}
+}*/
 .upcoming-events h2.main-head-event {
-    font-size: 50px;
-    font-weight: 900;
-    line-height: 1.1;
-    color: #212121;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1dbf73;
     text-transform: uppercase;
+    margin: 0;
     float: left;
+    display: inline-block;
 }
+.upcoming-events .calendar ul.flex.day {
+  width: 100%;
+  padding: 0
+}
+ul.flex.date {
+    padding: 0;
+}
+h2.main-head-event:before {
+    display: none;
+}
+
+
 .upcoming-events .btn-area.flex {
     float: right;
     margin-top: 6px;
 }
 .upcoming-events .head-area .btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 5px;
+    width: 34px;
+    height: 34px;
+    border-radius: 3px;
     background: #fff;
-    color: #212121 !important;
+    color: #1dbf73 !important;
     font-size: 20px;
     cursor: pointer;
     line-height: 38px;
     padding: 0;
-    margin-left: 10px;
+    margin-left: 5px;
     border: 1px solid #eee;
     transition: .3s;
+    margin-bottom: 5px;
 }
 .upcoming-events .head-area .btn:hover {
-    background: #ff025a;
+    background: #1dbf73;
     color: #fff !important;
 }
 
@@ -179,28 +197,33 @@ ol, ul {
     opacity: 1;
 }
 .calendar ul li {
-  width: 50%;
-  text-align: left;
-  margin: .5px;
-  /*opacity: 0.5;*/
-  font-size: 30px;
-  font-weight: 900;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.33;
-  letter-spacing: normal;
-  color: #212121;
-  padding: 2px 10px;
+    width: 50%;
+    text-align: left;
+    /* margin: .5px; */
+    /* opacity: 0.5; */
+    font-size: 20px;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #1dbf73;
+    list-style: none;
+    border-right: 1px solid #1dbf73;
+    border-bottom: 1px solid #1dbf73;
+}
+.calendar ul li:last-child {
+    border-right: none;
 }
 
 .calendar .pre-date {
-  opacity: .5;
+    opacity: .5;
 }
 
 .calendar .day li {
-    background: #212121;
+    background: #1dbf73;
     color: #fff;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 900;
     font-style: normal;
     font-stretch: normal;
@@ -209,6 +232,7 @@ ol, ul {
     text-align: center;
     text-transform: uppercase;
     padding: 7px;
+    list-style: none;
 }
 .calendar ul li span {
     opacity: .5;
@@ -222,7 +246,8 @@ ol, ul {
 }
 .calendar .date li {
     background: #FFF;
-    height: 152px;
+    height: auto;
+    padding: 20px 20px 35px 20px;
 }
 .head-area .sub-title-content {
     font-size: 20px;
@@ -252,15 +277,6 @@ ol, ul {
 .common-menu-wrap .nav li ul.sub-menu li:hover a {
     color: #ff0464;
 }
-
-
-.calendar .day li:nth-child(1) {
-    border-radius: 10px 0 0;
-}
-.calendar .day li:nth-child(7) {
-    border-radius: 0 10px 0 0px;
-}
-
 .calendar .date .event-date {
     position: relative;
     background: #fff;
@@ -445,7 +461,7 @@ ol, ul {
     padding: 20px;
     margin-bottom: 0;
     font-size: 18px;
-    color: #212121;
+    color: #1dbf73;
     background-color: #fff;
     border-bottom: 1px solid #ebebeb;
     text-transform: uppercase;
@@ -489,11 +505,11 @@ ol, ul {
     font-size: 14px;
     line-height: 24px;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     font-weight: 400;
 }
 .event-content h2 a {
-    color: #212121;
+    color: #1dbf73;
 }
 .event-content a.btn {
     font-weight: 600;
@@ -536,7 +552,7 @@ ol, ul {
 .popup-overlay h2.info a {
     font-size: 22px;
     text-transform: uppercase;
-    color: #212121;
+    color: #1dbf73;
     font-weight: 900;
     padding: 0;
 }
@@ -579,25 +595,25 @@ button:hover{
     height: 5px;
     border-radius: 4px;
 }
-.lead.eventco-review-cont {
+.lead.ecalendar-review-cont {
   padding-bottom: 22px;
     padding-top: 5px;
 }
-.eventco-review-cont .text-center {
+.ecalendar-review-cont .text-center {
     display: inline-block;
     transform: translate(50%, 0%);
     cursor: pointer;
 }
-.progressbar-content-wrapper .thm-progress-bar .eventco-review-cont {
+.progressbar-content-wrapper .thm-progress-bar .ecalendar-review-cont {
     font-size: 16px !important;
 }
-.eventco-review-cont i {
+.ecalendar-review-cont i {
     color: #c9366f;
 }
 .product-template-default {
     background: #F7F7F9;
 }
-.eventco-tabs span.eventco-rewards {
+.ecalendar-tabs span.ecalendar-rewards {
     padding: 28px 0;
     display: inline-block;
 }
@@ -605,14 +621,14 @@ button:hover{
     color: #979AA1;
     text-align: justify;
 }
-.wpneo-tabs .eventco-rewards a {
+.wpneo-tabs .ecalendar-rewards a {
     font-size: 16px;
     color: #393C40;
 }
-.eventco-reward-cont {
+.ecalendar-reward-cont {
     padding: 25px 30px 0;
 }
-.eventco-estimate-date {
+.ecalendar-estimate-date {
     background: #EBEBF1;
     padding: 18px;
     text-align: center;
@@ -629,7 +645,7 @@ button:hover{
     font-weight: 400;
     color: #393C40;
 }
-.eventco-galler-inner img {
+.ecalendar-galler-inner img {
     border: none !important;
 }
 
@@ -688,7 +704,7 @@ button:hover{
     background-color: rgba(34, 193, 174, 0) !important;
     border-color: rgba(51, 211, 192, 0) !important;
 }
-span.eventco-rewards {
+span.ecalendar-rewards {
     font-weight: 400;
     font-size: 16px;
     color: #4C4C4C;
@@ -713,7 +729,7 @@ span.eventco-rewards {
 .wpneo-campaign-creator-avatar {
     width: 70px;
 }
-.wpneo-list-details .eventco-bio {
+.wpneo-list-details .ecalendar-bio {
     overflow: hidden;
     background: #fff;
     width: 100%;
@@ -721,18 +737,18 @@ span.eventco-rewards {
     margin-top: 30px;
     display: inline-block;
 }
-span.eventco-icons{
+span.ecalendar-icons{
     font-size: 44px;
     color: #fff;
 }
 .wp-crowd-submenu {
     width: 230px;
 }
-.wpneo-list-details .eventco-bio img {
+.wpneo-list-details .ecalendar-bio img {
     width: 44px !important;
     border-radius: 50%;
 }
-.eventco-bio-social .jssocials-shares .jssocials-share a {
+.ecalendar-bio-social .jssocials-shares .jssocials-share a {
     display: block;
     width: inherit;
     line-height: inherit;
@@ -743,30 +759,30 @@ span.eventco-icons{
     font-weight: 300;
     transition: .3s;
 }
-.eventco-bio-social .jssocials-shares a {
+.ecalendar-bio-social .jssocials-shares a {
     background: transparent;
 }
-.eventco-bio-social .jssocials-shares a:hover {
+.ecalendar-bio-social .jssocials-shares a:hover {
     background: transparent;
     color: #c9366f;
 }
-.eventco-location {
+.ecalendar-location {
     display: inline-block;
     float: left;
     padding-right: 20px;
 }
-#wpneo-tab-description .eventco-bio img{
+#wpneo-tab-description .ecalendar-bio img{
     margin-bottom: 0;
     margin-top: 0;
 }
-#wpneo-tab-description .eventco-bio{
+#wpneo-tab-description .ecalendar-bio{
     padding: 16px 20px;
 }
 .wpneo-campaign-summary-inner .wpneo-location-wrapper {
     display: none;
 }
 
-.eventco-share {
+.ecalendar-share {
     padding: 8px 14px;
 }
 button.btn-content-wrap {
@@ -778,22 +794,22 @@ button.btn-content-wrap {
     margin-top: 5px;
 }
 
-.eventco-info-img a{
+.ecalendar-info-img a{
     padding-left: 10px;
 }
 
-.eventco-follow-us .wpneo-profile-about {
+.ecalendar-follow-us .wpneo-profile-about {
     margin-top: 12px;
     display: inline;
     width: 100%;
     font-size: 16px;
 }
-.eventco-follow-us .wpneo-profile-about .wpneo-social-link {
+.ecalendar-follow-us .wpneo-profile-about .wpneo-social-link {
     margin-right: 15px;
     color: #CBCBCB;
 }
 
-.eventco-info-img, .eventco-share{
+.ecalendar-info-img, .ecalendar-share{
     float: left;
     display: inline;
     width: auto;
@@ -828,12 +844,12 @@ div.wpneo-modal-wrapper-head h4 {
     background: #e05890;
 }
 
-.themeum-campaign-post .progressbar-content-wrapper {
+.ecalendar-campaign-post .progressbar-content-wrapper {
     padding-top: 14px;
     padding-left: 20px;
     padding-right: 20px;
 }
-.eventco-bio-social.jssocials {
+.ecalendar-bio-social.jssocials {
     padding: 10px 0;
 }
 .term-description {
@@ -877,7 +893,7 @@ span.round-circle{
 .woocommerce ul.order_details {
     padding: 0;
 }
-.eventco-reward-cont .select_rewards_button {
+.ecalendar-reward-cont .select_rewards_button {
     font-weight: 500;
 }
 
@@ -1405,7 +1421,7 @@ span.round-circle{
     animation-delay: -5.4s;
     -webkit-transform: translate3d(42vw, 38vh, 78px);
     transform: translate3d(11vw, 89vh, 78px);
-    background: #ff025a;
+    background: #1dbf73;
     border-radius: 4px;
 }
 
@@ -1571,10 +1587,10 @@ span.round-circle{
     font-size: 16px;
     font-weight: normal;
     line-height: 1.75;
-    color: #212121;
+    color: #1dbf73;
 }
 .speaker-content .intro-text p.locaion {
-    color: #212121;
+    color: #1dbf73;
 }
 .event-schedule-tab-view li.active.col .schedule-date-tab span.datetime {
     opacity: 1;
@@ -1678,7 +1694,7 @@ span.round-circle{
     border: none;
     font-size: 16px;
     padding: 30px;
-    color: #212121;
+    color: #1dbf73;
     font-weight: 300;
     display: inline-block;
     width: 100%;
@@ -1696,7 +1712,7 @@ span.round-circle{
     cursor: pointer;
     width: 166px;
     height: 60px;
-    background-color: #ff025a;
+    background-color: #1dbf73;
     position: absolute;
     right: 0;
     top: 0;
@@ -1739,7 +1755,7 @@ span.round-circle{
     cursor: pointer;
     width: 166px;
     height: 60px;
-    background-color: #ff025a;
+    background-color: #1dbf73;
 }
 .social-share ul li {
     display: inline-block;
@@ -1796,32 +1812,32 @@ span.round-circle{
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     opacity: 0.7;
     padding-bottom: 10px;
 }
-.eventco-post.themeum-grid-post {
+.ecalendar-post.ecalendar-grid-post {
     background-color: #ffffff;
     padding: 20px;
     margin-bottom: 30px;
     border-radius: 10px;
     transition: .3s;
 }
-.eventco-post.themeum-grid-post:hover {
+.ecalendar-post.ecalendar-grid-post:hover {
     box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.1);
 }
-.eventco-post .entry-headder h2 a {
-    color: #212121;
+.ecalendar-post .entry-headder h2 a {
+    color: #1dbf73;
     transition: .3s;
 }
-.eventco-post .entry-headder h2 {
+.ecalendar-post .entry-headder h2 {
     font-size: 30px;
     font-weight: 900;
     font-style: normal;
     font-stretch: normal;
     line-height: 1.07;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
 }
 .content-wrap-section.col-sm-7 {
@@ -1833,37 +1849,37 @@ span.round-circle{
 .wrap-btn-style a.thm-btn {
     border: none;
     padding: 0;
-    color: #212121;
+    color: #1dbf73;
     line-height: 1;
     font-size: 16px;
     padding-top: 12px;
 }
 .thm-post-meta ul li i {
-    color: #ff025a;
+    color: #1dbf73;
 }
 .thm-post-meta ul li a {
-    color: #212121;
+    color: #1dbf73;
     transition: .3s;
 }
 .thm-post-meta ul li a:hover, .wrap-btn-style a.thm-btn:hover,
-.eventco-post .entry-headder h2 a:hover  {
+.ecalendar-post .entry-headder h2 a:hover  {
     color: #ff0464;
 }
-.eventco-thumb {
-    color: #ff025a;
+.ecalendar-thumb {
+    color: #1dbf73;
     overflow: hidden;
     border-radius: 10px 10px  0 0;
 }
-.event_style2 .eventco-thumb {
+.event_style2 .ecalendar-thumb {
     border-radius: 10px;
 }
-.eventco-post.themeum-grid-post:hover .eventco-blog-wrap img {
+.ecalendar-post.ecalendar-grid-post:hover .ecalendar-blog-wrap img {
     transform: scale(1.1);
 }
 .blog-details-img .carousel-item.active {
     border-radius: 10px;
 }
-.eventco-thumb .embed-responsive {
+.ecalendar-thumb .embed-responsive {
     height: 290px;
     border-radius: 10px;
 }
@@ -1922,14 +1938,14 @@ span.round-circle{
 }
 
 /* Single Post  */
-.single-post .eventco-post {
+.single-post .ecalendar-post {
     background: transparent;
     padding: 0;
 }
-.single-post .eventco-post.themeum-grid-post:hover {
+.single-post .ecalendar-post.ecalendar-grid-post:hover {
     box-shadow: none;
 }
-.single-post .eventco-post.themeum-grid-post:hover .eventco-blog-wrap img {
+.single-post .ecalendar-post.ecalendar-grid-post:hover .ecalendar-blog-wrap img {
     transform: scale(1);
 }
 .single-post .blog-content-wrapper h2.entry-title.blog-entry-title {
@@ -1942,9 +1958,9 @@ span.round-circle{
     margin-top: 0px;
     margin-bottom: 12px;
 }
-.single-post .eventco-post p {
+.single-post .ecalendar-post p {
     font-size: 16px;
-    color: #212121;
+    color: #1dbf73;
     opacity: 0.7;
 }
 .single-post blockquote p {
@@ -1974,15 +1990,15 @@ span.round-circle{
 }
 
 /* Blog Grid Post */
-.eventco-grid-post {
+.ecalendar-grid-post {
     background: #fff;
     margin-bottom: 30px;
     border-radius: 10px;
 }
-.eventco-grid-post .entry-headder {
+.ecalendar-grid-post .entry-headder {
     padding: 30px;
 }
-.eventco-grid-post .entry-headder h2 {
+.ecalendar-grid-post .entry-headder h2 {
     font-size: 20px;
     font-weight: 900;
     font-style: normal;
@@ -1991,15 +2007,15 @@ span.round-circle{
     letter-spacing: normal;
     text-transform: uppercase;
 }
-.eventco-grid-post .entry-headder h2 a{
-    color: #212121;
+.ecalendar-grid-post .entry-headder h2 a{
+    color: #1dbf73;
     transition: .3s;
 }
-.eventco-grid-post .entry-headder {
+.ecalendar-grid-post .entry-headder {
     padding: 18px 20px 30px;
 }
 .date i.fa.fa-clock-o {
-    color: #ff025a;
+    color: #1dbf73;
 }
 .widget-blog-posts-section .media-body span {
     opacity: 0.7;
@@ -2009,13 +2025,13 @@ span.round-circle{
     font-stretch: normal;
     line-height: 1.5;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
 }
-.single-post .eventco-thumb .embed-responsive {
+.single-post .ecalendar-thumb .embed-responsive {
     height: auto;
 }
-.eventco-grid-post .eventco-thumb .embed-responsive,
-.eventco-grid-post .eventco-blog-wrap-link .entry-link-post-format {
+.ecalendar-grid-post .ecalendar-thumb .embed-responsive,
+.ecalendar-grid-post .ecalendar-blog-wrap-link .entry-link-post-format {
     height: 244px;
     min-height: 244px;
 }
@@ -2030,14 +2046,14 @@ span.round-circle{
     display: inline-block;
     width: 100%;
 }
-.themeum-title {
+.ecalendar-title {
     font-weight: 300;
     line-height: 32px;
 }
-.themeum-title span {
+.ecalendar-title span {
     padding-left: 30px;
 }
-.themeum-title span:before {
+.ecalendar-title span:before {
     content: "";
     position: absolute;
     width: 10px;
@@ -2081,7 +2097,7 @@ span.round-circle{
     font-stretch: normal;
     line-height: 1.25;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
 }
 .speaker-single-wrapper img.img-responsive {
@@ -2095,7 +2111,7 @@ span.round-circle{
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     margin-top: 75px;
     margin-left: 20px;
 }
@@ -2106,7 +2122,7 @@ span.round-circle{
     font-stretch: normal;
     line-height: 1.1;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
     margin-bottom: 60px;
 }
@@ -2123,7 +2139,7 @@ span.round-circle{
     opacity: 0.7;
     font-size: 16px;
     font-weight: 300;
-    color: #212121;
+    color: #1dbf73;
 }
 .speaker-social-icons ul {
     margin: 0;
@@ -2136,7 +2152,7 @@ span.round-circle{
     opacity: 0.7;
     font-size: 20px;
     text-align: center;
-    color: #212121;
+    color: #1dbf73;
     width: 50px;
     height: 50px;
     border-radius: 5px;
@@ -2162,7 +2178,7 @@ span.round-circle{
     opacity: 0.7;
     font-size: 16px;
     line-height: 1.75;
-    color: #212121;
+    color: #1dbf73;
 }
 .speaker-designation {
     margin-top: 0;
@@ -2225,7 +2241,7 @@ span.round-circle{
     width: 2px;
     height: 83px;
     opacity: 0.1;
-    border: solid 1px #212121;
+    border: solid 1px #1dbf73;
     content: "";
     position: absolute;
     right: 0;
@@ -2242,7 +2258,7 @@ span.round-circle{
     width: 2px;
     height: 83px;
     opacity: 0.1;
-    border: solid 1px #212121;
+    border: solid 1px #1dbf73;
     position: absolute;
     right: 0;
     top: -12px;
@@ -2272,7 +2288,7 @@ span.round-circle{
     width: 10px;
     height: 98%;
     border-radius: 10px;
-    background-color: #ff025a;
+    background-color: #1dbf73;
     position: absolute;
     left: 0px;
 }
@@ -2356,7 +2372,7 @@ span.round-circle{
     content: "";
     width: 100%;
     height: 100%;
-    background: #ff025a;
+    background: #1dbf73;
     position: absolute;
     opacity: 0;
     mix-blend-mode: multiply;
@@ -2381,14 +2397,14 @@ h3.speaker-name {
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
     transition: .3s;
 }
 .speaker-details span {
     opacity: 0.7;
     font-size: 16px;
-    color: #212121;
+    color: #1dbf73;
 }
 .speaker-image-wrap {
     position: relative;
@@ -2417,13 +2433,13 @@ h3.speaker-name {
     transition: .3s;
 }
 .speaker-addon-wrapper:hover .speaker-details { 
-    background-color: #ff025a;
+    background-color: #1dbf73;
 }
 
-.themeum-eventco-speakers .speakers:nth-child(2) .speaker-addon-wrapper,
-.themeum-eventco-speakers .speakers:nth-child(4) .speaker-addon-wrapper,
-.themeum-eventco-speakers .speakers:nth-child(6) .speaker-addon-wrapper,
-.themeum-eventco-speakers .speakers:nth-child(8) .speaker-addon-wrapper {
+.ecalendar-ecalendar-speakers .speakers:nth-child(2) .speaker-addon-wrapper,
+.ecalendar-ecalendar-speakers .speakers:nth-child(4) .speaker-addon-wrapper,
+.ecalendar-ecalendar-speakers .speakers:nth-child(6) .speaker-addon-wrapper,
+.ecalendar-ecalendar-speakers .speakers:nth-child(8) .speaker-addon-wrapper {
     background: #fff;
 }
 .yes-gutters .speaker-addon-wrapper {
@@ -2433,7 +2449,7 @@ h3.speaker-name {
     background-color: transparent;
 }
 .yes-gutters .speaker-addon-wrapper:hover .speaker-name a{
-    color: #ff025a;
+    color: #1dbf73;
 }
 .speaker-addon-wrapper:hover .speaker-details span {
     color: #212128;
@@ -2448,15 +2464,15 @@ h3.speaker-name {
     color: #fff;
     opacity: 1;
 }
-.themeum-eventco-speakers .speaker-addon-wrapper {
+.ecalendar-ecalendar-speakers .speaker-addon-wrapper {
     background: #f0f0f0;
 }
 
-.themeum-eventco-speakers .yes-gutters .speaker-addon-wrapper,
-.themeum-eventco-speakers .yes-gutters .speakers:nth-child(2) .speaker-addon-wrapper, 
-.themeum-eventco-speakers .yes-gutters .speakers:nth-child(4) .speaker-addon-wrapper, 
-.themeum-eventco-speakers .yes-gutters .speakers:nth-child(6) .speaker-addon-wrapper, 
-.themeum-eventco-speakers .yes-gutters .speakers:nth-child(8) .speaker-addon-wrapper{
+.ecalendar-ecalendar-speakers .yes-gutters .speaker-addon-wrapper,
+.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(2) .speaker-addon-wrapper, 
+.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(4) .speaker-addon-wrapper, 
+.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(6) .speaker-addon-wrapper, 
+.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(8) .speaker-addon-wrapper{
     background: transparent;
 }
 .speaker-addon-wrapper:hover .speaker-details h3.speaker-name a {
@@ -2473,7 +2489,7 @@ h3.speaker-name {
     font-weight: 900;
     line-height: 1.17;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
     margin-bottom: 24px;
 }
@@ -2482,14 +2498,14 @@ h3.speaker-name {
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
 }
 .event-information h2, .event-schedules {
     font-size: 24px;
     font-weight: 900;
     line-height: 1.46;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
     margin-top: 34px;
     margin-bottom: 10px;
@@ -2505,7 +2521,7 @@ h3.speaker-name {
     width: 224px;
     display: inline-block;
     font-size: 16px;
-    color: #212121;
+    color: #1dbf73;
     position: relative;
 }
 .event-information ul li span.event-info {
@@ -2531,7 +2547,7 @@ h3.speaker-name {
     font-stretch: normal;
     line-height: 1.1;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
 }
 .event-schedule-tab-view .schedule-date-tab span.datetime {
@@ -2558,7 +2574,7 @@ h3.event-session {
     font-stretch: normal;
     line-height: 42px;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
     margin: 0;
     cursor: pointer;
@@ -2571,7 +2587,7 @@ h3.event-session {
     font-stretch: normal;
     line-height: 28px;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     display: block;
     padding-top: 14px;
 }
@@ -2579,7 +2595,7 @@ h3.event-session {
     display: block;
     opacity: 0.7;
     font-size: 16px;
-    color: #212121;
+    color: #1dbf73;
     font-weight: 400;
 }
 
@@ -2598,7 +2614,7 @@ h3.event-session {
     font-stretch: normal;
     line-height: 20px;
     letter-spacing: normal;
-    color: #ff025a;
+    color: #1dbf73;
     display: block;
     margin-top: 5px;
 }
@@ -2609,7 +2625,7 @@ h3.event-session {
     font-weight: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     margin: 0;
 }
 
@@ -2617,13 +2633,13 @@ h3.event-session {
     margin-bottom: 18px;
 }
 .speaker-content .intro-text i.fa.fa-map-marker {
-    color: #ff025a;
+    color: #1dbf73;
     font-size: 20px;
     margin-right: 10px;
 }
 .intro-text p.locaion {
     margin: 0;
-    color: #212121;
+    color: #1dbf73;
     opacity: 1;
     margin-bottom: 20px;
 }
@@ -2637,10 +2653,10 @@ h3.event-session {
 .style2 .photo-gallery-items {
     margin-bottom: 30px;
 }
-.event_style2 .eventco-blog-wrap {
+.event_style2 .ecalendar-blog-wrap {
     overflow: inherit;
 }
-section.eventco-event-wrapper.event_style2 {
+section.ecalendar-event-wrapper.event_style2 {
     padding: 0;
 }
 .gallery-items-img {
@@ -2686,7 +2702,7 @@ section.eventco-event-wrapper.event_style2 {
     
 }
 .sponsor-img:hover {
-    border: solid 1px #212121;
+    border: solid 1px #1dbf73;
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
     -webkit-transition: .3s ease-in-out;
@@ -2750,7 +2766,7 @@ section.sponsor {
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     margin-left: 18px;
     padding-bottom: 15px;
     display: block;
@@ -2771,7 +2787,7 @@ h2.event-sponsor-title {
     font-stretch: normal;
     line-height: 1.1;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
     margin-bottom: 50px;
 }
@@ -2789,13 +2805,13 @@ h2.event-sponsor-title {
     border-radius: 0px 10px 10px 0px;
 }
 .event-schedule-tab-view ul li a.active {
-    background: #ff025a;
+    background: #1dbf73;
 }
 .event-schedule-tab-view ul li.active a.active {
-    background: #ff025a;
+    background: #1dbf73;
 }
 .event-schedule-tab-view ul li.active a {
-    background: #ff025a;
+    background: #1dbf73;
 }
 .event-schedule-tab-view li.col {
     padding: 0;
@@ -2809,7 +2825,7 @@ h2.event-sponsor-title {
     font-stretch: normal;
     line-height: 1.25;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
 }
 .event-schedule-tab-view ul li.active a span,
 .event-schedule-tab-view ul li.active a p,
@@ -2862,7 +2878,7 @@ h2.event-sponsor-title {
     margin: 0;
     opacity: 0.7;
     font-size: 16px;
-    color: #212121;
+    color: #1dbf73;
 }
 .schedule-style-two .event-schedule-tab-view ul li.active .schedule-date-tab,
 .schedule-style-two .event-schedule-tab-view ul li a.active .schedule-date-tab  {
@@ -2917,13 +2933,13 @@ h2.event-sponsor-title {
 
 
 /* Search Event */
-section.eventco-event-wrapper {
+section.ecalendar-event-wrapper {
     background: #f5f5f5;
     padding-top: 100px;
     padding-bottom: 70px;
     margin-bottom: -30px;
 }
-section.eventco-search-wrapper {
+section.ecalendar-search-wrapper {
     background: #f0f0f0;
     padding: 43px 0 50px;
 }
@@ -2934,7 +2950,7 @@ section.eventco-search-wrapper {
     font-stretch: normal;
     line-height: normal;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     margin-bottom: 18px;
 }
 .single-filter {
@@ -2942,11 +2958,11 @@ section.eventco-search-wrapper {
     float: left; 
 }
 
-.eventco-search button.event-search-btn {
+.ecalendar-search button.event-search-btn {
     width: 165px;
     height: 60px;
     border-radius: 5px;
-    background-color: #ff025a;
+    background-color: #1dbf73;
     margin-top: 47px;
     position: absolute;
     right: 15px;
@@ -2960,9 +2976,9 @@ button.event-search-btn:hover {
     border-color: transparent;
 }
 
-.eventco-search .postform, 
-.eventco-search select#post_status,
-.eventco-search input#search {
+.ecalendar-search .postform, 
+.ecalendar-search select#post_status,
+.ecalendar-search input#search {
     width: 93%;
     height: 58px;
     border-radius: 5px;
@@ -2974,21 +2990,21 @@ button.event-search-btn:hover {
     font-size: 16px;
     font-weight: normal;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
 }
-.eventco-event-wrapper .search-error-title {
+.ecalendar-event-wrapper .search-error-title {
      margin: 0px; 
 }
-.eventco-event-wrapper .goback {
+.ecalendar-event-wrapper .goback {
     display: block;
     width: 100%;
     margin-bottom: 20px;
 }
-.eventco-event-wrapper .goback a {
-    color: #212121;
+.ecalendar-event-wrapper .goback a {
+    color: #1dbf73;
     transition: .3s;
 }
-.eventco-event-wrapper .goback a:hover {
+.ecalendar-event-wrapper .goback a:hover {
     color: #ff0464;
 }
 .error-div p.search-error-text {
@@ -2998,36 +3014,36 @@ button.event-search-btn:hover {
 }
 
 /* Upcoming Event */
-.eventco-upcoming-event .date {
+.ecalendar-upcoming-event .date {
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
     letter-spacing: normal;
-    color: #212121;
+    color: #1dbf73;
     opacity: 1;
     padding-bottom: 20px;
     display: inline-block;
     margin-right: 28px;
 }
-.eventco-upcoming-event .date i.fa {
-    color: #ff025a;
+.ecalendar-upcoming-event .date i.fa {
+    color: #1dbf73;
     margin-right: 5px;
     font-size: 22px;
 }
-.eventco-upcoming-event .content-wrap-section a.event-btn {
+.ecalendar-upcoming-event .content-wrap-section a.event-btn {
     border-radius: 5px;
-    background-color: #ff025a;
+    background-color: #1dbf73;
     padding: 20px 31px;
     color: #fff;
     display: inline-block;
     font-size: 16px;
     font-weight: 500;
 }
-.eventco-upcoming-event .entry-summary {
+.ecalendar-upcoming-event .entry-summary {
     margin-bottom: 25px;
 }
 
-.eventco-upcoming-event a i.fa.fa-exclamation {
+.ecalendar-upcoming-event a i.fa.fa-exclamation {
     -ms-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
@@ -3038,10 +3054,10 @@ button.event-search-btn:hover {
     border-radius: 50%;
     margin-right: 5px;
 }
-nav.themeum-pagination {
+nav.ecalendar-pagination {
     margin-bottom: 100px;
 }
-.upcoming_event_style2 .eventco-blog-wrap {
+.upcoming_event_style2 .ecalendar-blog-wrap {
     background: #fff;
     border-radius: 10px;
 }
@@ -3052,30 +3068,30 @@ nav.themeum-pagination {
 .upcoming_event_style2 h2.entry-title a {
     font-size: 20px;
     font-weight: 900;
-    color: #212121;
+    color: #1dbf73;
     text-transform: uppercase;
 }
 .upcoming_event_style2 .entry-content {
     padding: 25px 20px 28px;
 }
-.upcoming_event_style2 .eventco-thumb {
-    color: #ff025a;
+.upcoming_event_style2 .ecalendar-thumb {
+    color: #1dbf73;
     overflow: hidden;
     border-radius: 10px 0 0;
 }
-.upcoming_event_style2 .eventco-blog-wrap img {
+.upcoming_event_style2 .ecalendar-blog-wrap img {
     border-radius: 10px 0 0;
 }
-.upcoming_event_style2 .eventco-blog-wrap .date {
+.upcoming_event_style2 .ecalendar-blog-wrap .date {
     display: inline-block;
     margin-right: 18px;
     font-size: 16px;
 }
-.upcoming_event_style2 .eventco-blog-wrap .date:last-child {
+.upcoming_event_style2 .ecalendar-blog-wrap .date:last-child {
     margin-right: 0;
 }
-.upcoming_event_style2 .eventco-blog-wrap .date i.fa {
-    color: #ff025a;
+.upcoming_event_style2 .ecalendar-blog-wrap .date i.fa {
+    color: #1dbf73;
     margin-right: 5px;
 }
 .upcoming_event_style2 .entry-content p {
@@ -3084,21 +3100,21 @@ nav.themeum-pagination {
 }
 
 /* Current Event */
-.event_style2 .eventco-post.themeum-grid-post {
+.event_style2 .ecalendar-post.ecalendar-grid-post {
     background-color: transparent;
     padding: 0;
     margin-bottom: 30px;
     border-radius: 0;
     transition: .3s;
 }
-.event_style2 .eventco-post.themeum-grid-post:hover {
+.event_style2 .ecalendar-post.ecalendar-grid-post:hover {
     box-shadow: none;
 }
-.event_style2 .eventco-post .entry-headder h2 {
+.event_style2 .ecalendar-post .entry-headder h2 {
     margin-top: 30px;
     margin-bottom: 19px;
 }
-.event_style2 .eventco-blog-wrap.col-sm-6 {
+.event_style2 .ecalendar-blog-wrap.col-sm-6 {
     margin-top: 40px;
 }
 
@@ -3110,7 +3126,7 @@ nav.themeum-pagination {
 .wppb-post-grid-content {
     padding: 0 20px 30px;
 }
-.past-event-gray .eventco-post.themeum-grid-post {
+.past-event-gray .ecalendar-post.ecalendar-grid-post {
     border-radius: 10px;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
@@ -3118,7 +3134,7 @@ nav.themeum-pagination {
     transition: .3s ease-in-out;
     opacity: .6;
 }
-.past-event-gray .eventco-post.themeum-grid-post:hover {
+.past-event-gray .ecalendar-post.ecalendar-grid-post:hover {
     -webkit-filter: grayscale(0);
     filter: grayscale(0);
     -webkit-transition: .3s ease-in-out;
@@ -3127,7 +3143,7 @@ nav.themeum-pagination {
 }
 .content-wrap-section p {
     font-size: 16px;
-    color: #212121;
+    color: #1dbf73;
 }
 
 
@@ -3144,7 +3160,7 @@ nav.themeum-pagination {
 .schedule-style-four .event-schedule-tab-view ul li.active a p,
 .schedule-style-four .event-schedule-tab-view ul li a.active span, 
 .schedule-style-four .event-schedule-tab-view ul li a.active p {
-    color: #ff025a;
+    color: #1dbf73;
 }
 .schedule-style-four .event-schedule-tab-view li.col {
     border-right: 1px solid #e9ecef;
@@ -3172,7 +3188,7 @@ nav.themeum-pagination {
     background: #895dff;
 }
 .schedule-style-four .event-container:nth-child(4):before {
-    background: #ff025a;
+    background: #1dbf73;
 }
 .sub-title-content span {
     font-size: 16px;
@@ -3180,4 +3196,24 @@ nav.themeum-pagination {
     line-height: 1.25;
     letter-spacing: normal;
     color: #ffc953;
+}
+
+.spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    border-top-color: #333;
+    animation: spinner .6s linear infinite;
+}
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
 }

@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @link http://www.deluxeblogtips.com/meta-box/
  */
 
-add_filter( 'rwmb_meta_boxes', 'themeum_core_register_meta_boxes' );
+add_filter( 'rwmb_meta_boxes', 'ecalendar_core_register_meta_boxes' );
 
 /**
  * Register meta boxes
@@ -26,7 +26,7 @@ add_filter( 'rwmb_meta_boxes', 'themeum_core_register_meta_boxes' );
  * @return void
  */
 
-function themeum_core_register_meta_boxes( $meta_boxes )
+function ecalendar_core_register_meta_boxes( $meta_boxes )
 {
 
 	/**
@@ -36,7 +36,7 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 	*/
 
 	# Better has an underscore as last sign
-	$prefix = 'themeum_';
+	$prefix = 'ecalendar_';
 		$contact_forms = array();
 	    $contact_forms = get_all_posts('wpcf7_contact_form');
 	    $contact_forms['Select'] = 'Select';
@@ -55,7 +55,7 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'id' => 'post-meta-quote',
 
 		// Meta box title - Will appear at the drag and drop handle bar. Required.
-		'title' => esc_html__( 'Post Quote Settings', 'eventco-core' ),
+		'title' => esc_html__( 'Post Quote Settings', 'ecalendar-core' ),
 
 		// Post types, accept custom post types as well - DEFAULT is array('post'). Optional.
 		'pages' => array( 'post'),
@@ -73,20 +73,20 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'fields' => array(
 			array(
 				// Field name - Will be used as label
-				'name'  => esc_html__( 'Quote Text', 'eventco-core' ),
+				'name'  => esc_html__( 'Quote Text', 'ecalendar-core' ),
 				// Field ID, i.e. the meta key
 				'id'    => "{$prefix}qoute",
-				'desc'  => esc_html__( 'Write Your Quote Here', 'eventco-core' ),
+				'desc'  => esc_html__( 'Write Your Quote Here', 'ecalendar-core' ),
 				'type'  => 'textarea',
 				// Default value (optional)
 				'std'   => ''
 			),
 			array(
 				// Field name - Will be used as label
-				'name'  => esc_html__( 'Quote Author', 'eventco-core' ),
+				'name'  => esc_html__( 'Quote Author', 'ecalendar-core' ),
 				// Field ID, i.e. the meta key
 				'id'    => "{$prefix}qoute_author",
-				'desc'  => esc_html__( 'Write Quote Author or Source', 'eventco-core' ),
+				'desc'  => esc_html__( 'Write Quote Author or Source', 'ecalendar-core' ),
 				'type'  => 'text',
 				// Default value (optional)
 				'std'   => ''
@@ -101,7 +101,7 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'id' => 'post-meta-link',
 
 		// Meta box title - Will appear at the drag and drop handle bar. Required.
-		'title' => esc_html__( 'Post Link Settings', 'eventco-core' ),
+		'title' => esc_html__( 'Post Link Settings', 'ecalendar-core' ),
 
 		// Post types, accept custom post types as well - DEFAULT is array('post'). Optional.
 		'pages' => array( 'post'),
@@ -119,10 +119,10 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'fields' => array(
 			array(
 				// Field name - Will be used as label
-				'name'  => esc_html__( 'Link URL', 'eventco-core' ),
+				'name'  => esc_html__( 'Link URL', 'ecalendar-core' ),
 				// Field ID, i.e. the meta key
 				'id'    => "{$prefix}link",
-				'desc'  => esc_html__( 'Write Your Link', 'eventco-core' ),
+				'desc'  => esc_html__( 'Write Your Link', 'ecalendar-core' ),
 				'type'  => 'text',
 				// Default value (optional)
 				'std'   => ''
@@ -136,7 +136,7 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'id' => 'post-meta-audio',
 
 		// Meta box title - Will appear at the drag and drop handle bar. Required.
-		'title' => esc_html__( 'Post Audio Settings', 'eventco-core' ),
+		'title' => esc_html__( 'Post Audio Settings', 'ecalendar-core' ),
 
 		// Post types, accept custom post types as well - DEFAULT is array('post'). Optional.
 		'pages' => array( 'post'),
@@ -154,10 +154,10 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'fields' => array(
 			array(
 				// Field name - Will be used as label
-				'name'  => esc_html__( 'Audio Embed Code', 'eventco-core' ),
+				'name'  => esc_html__( 'Audio Embed Code', 'ecalendar-core' ),
 				// Field ID, i.e. the meta key
 				'id'    => "{$prefix}audio_code",
-				'desc'  => esc_html__( 'Write Your Audio Embed Code Here', 'eventco-core' ),
+				'desc'  => esc_html__( 'Write Your Audio Embed Code Here', 'ecalendar-core' ),
 				'type'  => 'textarea',
 				// Default value (optional)
 				'std'   => ''
@@ -168,7 +168,7 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 
 	$meta_boxes[] = array(
 		'id' 		=> 'post-meta-video',
-		'title' 	=> esc_html__( 'Post Video Settings', 'eventco-core' ),
+		'title' 	=> esc_html__( 'Post Video Settings', 'ecalendar-core' ),
 		'pages' 	=> array( 'post'),
 		'context' 	=> 'normal',
 		'priority' 	=> 'high',
@@ -176,29 +176,29 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'fields' 	=> array(
 			array(
 				// Field name - Will be used as label
-				'name'  => esc_html__( 'Video Embed Code/ID', 'eventco-core' ),
+				'name'  => esc_html__( 'Video Embed Code/ID', 'ecalendar-core' ),
 				// Field ID, i.e. the meta key
 				'id'    => "{$prefix}video",
-				'desc'  => esc_html__( 'Write Your Vedio Embed Code/ID Here', 'eventco-core' ),
+				'desc'  => esc_html__( 'Write Your Vedio Embed Code/ID Here', 'ecalendar-core' ),
 				'type'  => 'textarea',
 				// Default value (optional)
 				'std'   => ''
 			),
 			array(
-				'name'  => __( 'Video Durations', 'eventco-core' ),
+				'name'  => __( 'Video Durations', 'ecalendar-core' ),
 				'id'    => "{$prefix}video_durations",
 				'type'  => 'text',
 				'std'   => ''
 			),
 			array(
-				'name'     => esc_html__( 'Select Vedio Type/Source', 'eventco-core' ),
+				'name'     => esc_html__( 'Select Vedio Type/Source', 'ecalendar-core' ),
 				'id'       => "{$prefix}video_source",
 				'type'     => 'select',
 				// Array of 'value' => 'Label' pairs for select box
 				'options'  => array(
-					'1' => esc_html__( 'Embed Code', 'eventco-core' ),
-					'2' => esc_html__( 'YouTube', 'eventco-core' ),
-					'3' => esc_html__( 'Vimeo', 'eventco-core' ),
+					'1' => esc_html__( 'Embed Code', 'ecalendar-core' ),
+					'2' => esc_html__( 'YouTube', 'ecalendar-core' ),
+					'3' => esc_html__( 'Vimeo', 'ecalendar-core' ),
 				),
 				// Select multiple values, optional. Default is false.
 				'multiple'    => false,
@@ -213,7 +213,7 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'id' => 'post-meta-gallery',
 
 		// Meta box title - Will appear at the drag and drop handle bar. Required.
-		'title' => esc_html__( 'Post Gallery Settings', 'eventco-core' ),
+		'title' => esc_html__( 'Post Gallery Settings', 'ecalendar-core' ),
 
 		// Post types, accept custom post types as well - DEFAULT is array('post'). Optional.
 		'pages' => array( 'post'),
@@ -230,7 +230,7 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		// List of meta fields
 		'fields' => array(
 			array(
-				'name'             => esc_html__( 'Gallery Image Upload', 'eventco-core' ),
+				'name'             => esc_html__( 'Gallery Image Upload', 'ecalendar-core' ),
 				'id'               => "{$prefix}gallery_images",
 				'type'             => 'image_advanced',
 				'max_file_uploads' => 6,
@@ -297,44 +297,44 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 
 
 			array(
-				'name'   => esc_html__( 'Speaker Session List', 'eventco-core' ),
+				'name'   => esc_html__( 'Speaker Session List', 'ecalendar-core' ),
 				'id'     => 'session_info_group',
 				'type'   => 'group',
 				'fields' => array(		
 					array(
-						'name'          => esc_html__( 'Session No', 'eventco-core' ),
+						'name'          => esc_html__( 'Session No', 'ecalendar-core' ),
 						'id'            => "{$prefix}session_nbr",
 						'type'          => 'text',
 						'std'           => '',
-						'desc'  		=> esc_html__( '01', 'eventco-core' ),
+						'desc'  		=> esc_html__( '01', 'ecalendar-core' ),
 					),
 					array(
-						'name'          => esc_html__( 'Day Name', 'eventco-core' ),
+						'name'          => esc_html__( 'Day Name', 'ecalendar-core' ),
 						'id'            => "{$prefix}session_day",
 						'type'          => 'text',
 						'std'           => '',
-						'desc'  		=> esc_html__( 'Day 1', 'eventco-core' ),
+						'desc'  		=> esc_html__( 'Day 1', 'ecalendar-core' ),
 					),
 					array(
-						'name'          => esc_html__( 'Session Start Time', 'eventco-core' ),
+						'name'          => esc_html__( 'Session Start Time', 'ecalendar-core' ),
 						'id'            => "{$prefix}start_datetime",
 						'type'          => 'datetime',
 						'std'           => '',
-						'desc'  		=> esc_html__( 'Start Time', 'eventco-core' ),
+						'desc'  		=> esc_html__( 'Start Time', 'ecalendar-core' ),
 					),
 					array(
-						'name'          => esc_html__( 'Session Topic', 'eventco-core' ),
+						'name'          => esc_html__( 'Session Topic', 'ecalendar-core' ),
 						'id'            => "{$prefix}session_topic",
 						'type'          => 'textarea',
 						'std'           => '',
-						'desc'  		=> esc_html__( 'Introduction to Material Design', 'eventco-core' ),
+						'desc'  		=> esc_html__( 'Introduction to Material Design', 'ecalendar-core' ),
 					),
 					array(
-						'name'          => esc_html__( 'Session Venue', 'eventco-core' ),
+						'name'          => esc_html__( 'Session Venue', 'ecalendar-core' ),
 						'id'            => "{$prefix}session_venue",
 						'type'          => 'text',
 						'std'           => '',
-						'desc'  		=> esc_html__( 'Hall 1', 'eventco-core' ),
+						'desc'  		=> esc_html__( 'Hall 1', 'ecalendar-core' ),
 					),
 				),
 				'clone'  => true,
@@ -355,32 +355,32 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'fields' 	=> array(
 
 			array(
-				'name'          => esc_html__( 'Event Start Time', 'eventco-core' ),
+				'name'          => esc_html__( 'Event Start Time', 'ecalendar-core' ),
 				'id'            => "{$prefix}event_start_datetime",
 				'type'          => 'datetime',
 				'std'           => '',
-				'desc'  		=> esc_html__( 'Start Date Time', 'eventco-core' ),
+				'desc'  		=> esc_html__( 'Start Date Time', 'ecalendar-core' ),
 			),
 			array(
-				'name'          => esc_html__( 'Event End Time', 'eventco-core' ),
+				'name'          => esc_html__( 'Event End Time', 'ecalendar-core' ),
 				'id'            => "{$prefix}event_end_datetime",
 				'type'          => 'datetime',
 				'std'           => '',
-				'desc'  		=> esc_html__( 'End Date Time', 'eventco-core' ),
+				'desc'  		=> esc_html__( 'End Date Time', 'ecalendar-core' ),
 			),
 			array(
-				'name'          => esc_html__( 'Organizer', 'eventco-core' ),
+				'name'          => esc_html__( 'Organizer', 'ecalendar-core' ),
 				'id'            => "{$prefix}event_organizer",
 				'type'          => 'text',
 				'std'           => '',
-				'desc'  		=> esc_html__( 'Organizer', 'eventco-core' ),
+				'desc'  		=> esc_html__( 'Organizer', 'ecalendar-core' ),
 			),
 			array(
-				'name'          => esc_html__( 'Address', 'eventco-core' ),
+				'name'          => esc_html__( 'Address', 'ecalendar-core' ),
 				'id'            => "{$prefix}event_location",
 				'type'          => 'text',
 				'std'           => '',
-				'desc'  		=> esc_html__( 'Dreamland, Dublin', 'eventco-core' ),
+				'desc'  		=> esc_html__( 'Dreamland, Dublin', 'ecalendar-core' ),
 			),
 
 		)
@@ -389,7 +389,7 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 
 	$meta_boxes[] = array(
 		'id' 		=> 'event-meta-setting',
-		'title' 	=> esc_html__( 'Event Speakers Infomation', 'eventco-core' ),
+		'title' 	=> esc_html__( 'Event Speakers Infomation', 'ecalendar-core' ),
 		'pages' 	=> array( 'event'),
 		'context' 	=> 'normal',
 		'priority' 	=> 'high',
@@ -397,52 +397,52 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'fields' 	=> array(
 
 			array(
-				'name'   => esc_html__( 'Event Information', 'eventco-core' ),
+				'name'   => esc_html__( 'Event Information', 'ecalendar-core' ),
 				'id'     => 'event_section',
 				'type'   => 'group',
 				'fields' => array(
 					array(
-						'name'  		=> esc_html__( 'Date of Event', 'eventco-core' ),
+						'name'  		=> esc_html__( 'Date of Event', 'ecalendar-core' ),
 						'id'    		=> "{$prefix}date_of_event",
 						'type'  		=> 'textarea',
 						'std'   		=> '',
-						'placeholder' 	=> esc_html__( 'Day 1', 'eventco-core' ),
+						'placeholder' 	=> esc_html__( 'Day 1', 'ecalendar-core' ),
 					),
 					array(
-						'name'          => esc_html__( 'Session Date', 'eventco-core' ),
+						'name'          => esc_html__( 'Session Date', 'ecalendar-core' ),
 						'id'            => "{$prefix}event_date",
 						'type'          => 'date',
 						'std'           => '',
-						'desc'  		=> esc_html__( 'Session Date', 'eventco-core' ),
+						'desc'  		=> esc_html__( 'Session Date', 'ecalendar-core' ),
 					),
 					array(
-						'name'   		=> esc_html__( 'Session Information', 'eventco-core' ),
+						'name'   		=> esc_html__( 'Session Information', 'ecalendar-core' ),
 						'id'     		=> 'event_info_group',
 						'type'   		=> 'group',
 						'fields' 		=> array(
 									
 							array(
-								'name'          => esc_html__( 'Session', 'eventco-core' ),
+								'name'          => esc_html__( 'Session', 'ecalendar-core' ),
 								'id'            => "{$prefix}session",
 								'type'          => 'textarea',
 								'std'           => '',
 							),
 							array(
-								'name'          => esc_html__( 'Session Custom Link', 'eventco-core' ),
+								'name'          => esc_html__( 'Session Custom Link', 'ecalendar-core' ),
 								'id'            => "{$prefix}session_link",
 								'type'          => 'text',
 								'std'           => '',
 							),
 							array(
-								'name'          => esc_html__( 'Intro Text', 'eventco-core' ),
+								'name'          => esc_html__( 'Intro Text', 'ecalendar-core' ),
 								'id'            => "{$prefix}intro_text",
 								'type'          => 'textarea',
 								'std'           => '',
 							),
 							array(
-					            'name'       		=> __( 'Speaker(s)', 'eventco-core' ),
+					            'name'       		=> __( 'Speaker(s)', 'ecalendar-core' ),
 								'id'         		=> "speaker_name",
-					            'desc'       		=> __( 'Speakers', 'eventco-core' ),
+					            'desc'       		=> __( 'Speakers', 'ecalendar-core' ),
 					            'type'       		=> 'post',
 					            'post_type'  		=> 'speaker',
 					            'field_type' 		=> 'select_advanced',
@@ -451,24 +451,24 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 					             	'posts_per_page' 	=> '-1',
 					            ),
 					            'multiple'    	=> false,
-					            'placeholder' 	=> esc_html__( 'Select Speaker', 'eventco-core' ),
+					            'placeholder' 	=> esc_html__( 'Select Speaker', 'ecalendar-core' ),
 					        ),
 							array(
-								'name'          => esc_html__( 'Start Time', 'eventco-core' ),
+								'name'          => esc_html__( 'Start Time', 'ecalendar-core' ),
 								'id'            => "{$prefix}start_datetime",
 								'type'          => 'time',
 								'std'           => '',
-								'desc'  		=> esc_html__( 'Start Time', 'eventco-core' ),
+								'desc'  		=> esc_html__( 'Start Time', 'ecalendar-core' ),
 							),
 							array(
-								'name'          => esc_html__( 'End Time', 'eventco-core' ),
+								'name'          => esc_html__( 'End Time', 'ecalendar-core' ),
 								'id'            => "{$prefix}end_time",
 								'type'          => 'time',
 								'std'           => '',
-								'desc'  		=> esc_html__( 'End Time', 'eventco-core' ),
+								'desc'  		=> esc_html__( 'End Time', 'ecalendar-core' ),
 							),
 							array(
-								'name'          => esc_html__( 'Venue', 'eventco-core' ),
+								'name'          => esc_html__( 'Venue', 'ecalendar-core' ),
 								'id'            => "{$prefix}venue",
 								'type'          => 'text',
 								'std'           => '',
@@ -518,16 +518,16 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 		'autosave' 	=> true,
 		'fields' 	=> array(
 			array(
-				'name'   		=> esc_html__( 'Sponsor List', 'eventco-core' ),
+				'name'   		=> esc_html__( 'Sponsor List', 'ecalendar-core' ),
 				'id'     		=> 'event_sponsor_group',
 				'type'   		=> 'group',
 				'fields' 		=> array(
 					array(
-						'name'          => esc_html__( 'Sponsor Title', 'eventco-core' ),
+						'name'          => esc_html__( 'Sponsor Title', 'ecalendar-core' ),
 						'id'            => "{$prefix}sponsor_title",
 						'type'          => 'text',
 						'std'           => '',
-						'desc'  		=> esc_html__( 'Gold Sponsor', 'eventco-core' ),
+						'desc'  		=> esc_html__( 'Gold Sponsor', 'ecalendar-core' ),
 					),		
 					array(
 						'name'  		=> __( 'Sponsor Items', 'eventex' ),
@@ -634,7 +634,7 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 	// -----------------------------------------------------------------------------
 	// $meta_boxes[] = array(
 	// 	'id' 		=> 'schedule-meta-setting',
-	// 	'title' 	=> esc_html__( 'Schedule Infomation', 'eventco-core' ),
+	// 	'title' 	=> esc_html__( 'Schedule Infomation', 'ecalendar-core' ),
 	// 	'pages' 	=> array( 'schedule'),
 	// 	'context' 	=> 'normal',
 	// 	'priority' 	=> 'high',
@@ -642,32 +642,32 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 	// 	'fields' 	=> array(
 
 	// 		array(
-	// 			'name'  => esc_html__( 'Date of Event', 'eventco-core' ),
+	// 			'name'  => esc_html__( 'Date of Event', 'ecalendar-core' ),
 	// 			'id'    => "{$prefix}date_of_event",
 	// 			'type'  => 'textarea',
 	// 			'std'   => ''
 	// 		),
 	// 		array(
-	// 			'name'   => esc_html__( 'Event Information', 'eventco-core' ),
+	// 			'name'   => esc_html__( 'Event Information', 'ecalendar-core' ),
 	// 			'id'     => 'event_info_group',
 	// 			'type'   => 'group',
 	// 			'fields' => array(		
 	// 				array(
-	// 					'name'          => esc_html__( 'Session', 'eventco-core' ),
+	// 					'name'          => esc_html__( 'Session', 'ecalendar-core' ),
 	// 					'id'            => "{$prefix}session",
 	// 					'type'          => 'text',
 	// 					'std'           => '',
 	// 				),
 	// 				array(
-	// 					'name'          => esc_html__( 'Session Custom Link', 'eventco-core' ),
+	// 					'name'          => esc_html__( 'Session Custom Link', 'ecalendar-core' ),
 	// 					'id'            => "{$prefix}session_link",
 	// 					'type'          => 'text',
 	// 					'std'           => '',
 	// 				),
 	// 				array(
-	// 		            'name'       		=> __( 'Speaker(s)', 'eventco-core' ),
+	// 		            'name'       		=> __( 'Speaker(s)', 'ecalendar-core' ),
 	// 					'id'         		=> "speaker_name",
-	// 		            'desc'       		=> __( 'Speakers', 'eventco-core' ),
+	// 		            'desc'       		=> __( 'Speakers', 'ecalendar-core' ),
 	// 		            'type'       		=> 'post',
 	// 		            'post_type'  		=> 'speaker',
 	// 		            'field_type' 		=> 'select_advanced',
@@ -676,24 +676,24 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 	// 		             	'posts_per_page' 	=> '-1',
 	// 		            ),
 	// 		            'multiple'    => false,
-	// 		            'placeholder' 	=> esc_html__( 'Select Speaker', 'eventco-core' ),
+	// 		            'placeholder' 	=> esc_html__( 'Select Speaker', 'ecalendar-core' ),
 	// 		        ),
 	// 				array(
-	// 					'name'          => esc_html__( 'Start Time', 'eventco-core' ),
+	// 					'name'          => esc_html__( 'Start Time', 'ecalendar-core' ),
 	// 					'id'            => "{$prefix}start_datetime",
 	// 					'type'          => 'time',
 	// 					'std'           => '',
-	// 					'desc'  		=> esc_html__( 'Start Time', 'eventco-core' ),
+	// 					'desc'  		=> esc_html__( 'Start Time', 'ecalendar-core' ),
 	// 				),
 	// 				array(
-	// 					'name'          => esc_html__( 'End Time', 'eventco-core' ),
+	// 					'name'          => esc_html__( 'End Time', 'ecalendar-core' ),
 	// 					'id'            => "{$prefix}end_time",
 	// 					'type'          => 'time',
 	// 					'std'           => '',
-	// 					'desc'  		=> esc_html__( 'End Time', 'eventco-core' ),
+	// 					'desc'  		=> esc_html__( 'End Time', 'ecalendar-core' ),
 	// 				),
 	// 				array(
-	// 					'name'             => esc_html__( 'BG color', 'eventco-core' ),
+	// 					'name'             => esc_html__( 'BG color', 'ecalendar-core' ),
 	// 					'id'               => "schedule_color",
 	// 					'type'             => 'color',
 	// 					'std' 			   => "#f5f5f5"
@@ -737,27 +737,27 @@ function themeum_core_register_meta_boxes( $meta_boxes )
 	# ============================================
 	$meta_boxes[] = array(
 		'id' 			=> 'page-meta-settings',
-		'title' 		=> esc_html__( 'Page Settings', 'eventco-core' ),
+		'title' 		=> esc_html__( 'Page Settings', 'ecalendar-core' ),
 		'pages' 		=> array( 'page'),
 		'context' 		=> 'normal',
 		'priority' 		=> 'high',
 		'fields' 		=> array(
 			array(
-				'name'             => esc_html__( 'Upload Subtitle Banner Image', 'eventco-core' ),
+				'name'             => esc_html__( 'Upload Subtitle Banner Image', 'ecalendar-core' ),
 				'id'               => $prefix."subtitle_images",
 				'type'             => 'image_advanced',
 				'max_file_uploads' => 1,
 			),	
 			array(
-				'name'             => esc_html__( 'Upload Subtitle BG Color', 'eventco-core' ),
+				'name'             => esc_html__( 'Upload Subtitle BG Color', 'ecalendar-core' ),
 				'id'               => "{$prefix}subtitle_color",
 				'type'             => 'color',
 				'std' 			   => "#f0f0f0"
 			),	
 			array(
-				'name'  			=> __( 'Disable Subheader', 'eventco-core' ),
+				'name'  			=> __( 'Disable Subheader', 'ecalendar-core' ),
 				'id'    			=> "{$prefix}disable_subheader",
-				'desc'  			=> __( 'Disable Subheader From Page.', 'eventco-core' ),
+				'desc'  			=> __( 'Disable Subheader From Page.', 'ecalendar-core' ),
 				'type'  			=> 'checkbox',
 				'std'   			=> 0
 			),
