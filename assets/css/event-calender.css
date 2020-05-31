@@ -25,10 +25,12 @@ body {
 }
 .upcoming-events .calendar ul.flex.day {
   width: 100%;
-  padding: 0
+  padding: 0;
+  margin: 0;
 }
 ul.flex.date {
     padding: 0;
+    margin: 0;
 }
 h2.main-head-event:before {
     display: none;
@@ -211,6 +213,7 @@ ol, ul {
     list-style: none;
     border-right: 1px solid #1dbf73;
     border-bottom: 1px solid #1dbf73;
+    margin: 0;
 }
 .calendar ul li:last-child {
     border-right: none;
@@ -239,14 +242,14 @@ ol, ul {
     padding: 2px;
 }
 .calendar ul li span.recent-date {
-    opacity: .8;
+    opacity: 1;
 }
 .calendar ul li.event-date span {
     opacity: 1;
 }
 .calendar .date li {
     background: #FFF;
-    height: auto;
+    min-height: 132px;
     padding: 20px 20px 35px 20px;
 }
 .head-area .sub-title-content {
@@ -480,7 +483,7 @@ ol, ul {
 }
 .calendar .date .event-date:hover .event-intro {
     visibility: visible;
-    left: 158px;
+    left: 133px;
     background: #fff;
     top: 0;
     z-index: 9;
@@ -501,24 +504,29 @@ ol, ul {
     font-weight: 900;
 }
 .event-intro .event-content p {
-    opacity: 0.8;
     font-size: 14px;
     line-height: 24px;
     letter-spacing: normal;
-    color: #1dbf73;
+    color: #333;
     font-weight: 400;
 }
-.event-content h2 a {
+
+.event-date .event-intro .event-content h2 a {
     color: #1dbf73;
+    text-decoration: none !important;
+    text-transform: none;
+}
+.event-date .event-intro .event-content h2 {
+    margin: 0;
 }
 .event-content a.btn {
-    font-weight: 600;
     border: none;
+    color: #000000;
+    font-size: 14px;
 }
 .event-content a.btn:hover {
     border: none;
-    background: #e60352;
-    color: #fff;
+    color: #5cc074;
 }
 
 /* Calendar */
@@ -2494,7 +2502,7 @@ h3.speaker-name {
     margin-bottom: 24px;
 }
 .event-content p {
-    opacity: 0.7;
+    /*opacity: 0.7;*/
     font-size: 16px;
     line-height: 1.75;
     letter-spacing: normal;
@@ -3216,4 +3224,38 @@ nav.ecalendar-pagination {
 
 @keyframes spinner {
     to {transform: rotate(360deg);}
+}
+.upcoming-events {
+  max-width: 100% !important;
+}
+
+.entry .entry-content > * {
+    max-width: 100% !important;
+}
+
+.upcoming-events .btn.prev {
+    background-image: url(arrow_left.png) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+.upcoming-events .btn.next {
+    background-image: url(arrow_right.png) !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+/* Calender View */
+.event-date .event-content h2:before {
+  display: none;
+}
+
+/* Metabox */
+#event-info label {
+    width: 18%;
+    display: inline-block;
+}
+.meta-box-sortables input {
+    vertical-align: middle;
+    width: 30%;
 }
