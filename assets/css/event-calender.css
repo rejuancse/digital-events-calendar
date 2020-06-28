@@ -6,14 +6,9 @@
 * Version: 1.0.0
 */
 
-
-
 body {
     background-color: #e8e3e3 !important;
 }
-/*body.page-template-event-calender-php {
-    background: #f5f5f5;
-}*/
 .upcoming-events h2.main-head-event {
     font-size: 28px;
     font-weight: 700;
@@ -24,9 +19,9 @@ body {
     display: inline-block;
 }
 .upcoming-events .calendar ul.flex.day {
-  width: 100%;
-  padding: 0;
-  margin: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 ul.flex.date {
     padding: 0;
@@ -46,53 +41,56 @@ h2.main-head-event:before {
     height: 34px;
     border-radius: 3px;
     background: #fff;
-    color: #1dbf73 !important;
+    color: #1dbf73;
     font-size: 20px;
     cursor: pointer;
-    line-height: 38px;
+    line-height: 30px;
     padding: 0;
     margin-left: 5px;
     border: 1px solid #eee;
     transition: .3s;
     margin-bottom: 5px;
+    text-align: center;
 }
 .upcoming-events .head-area .btn:hover {
     background: #1dbf73;
     color: #fff !important;
 }
-
+div#calendar_area {
+    position: relative;
+}
 .loading-calendar{
     opacity: 0.5;
 }
 ol, ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 .flex {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
 }
 .section-event {
     padding: 0px 0 100px 0;
     background: #f5f5f5;
 }
 .inline-flex {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -moz-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -moz-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
 }
 .flex-grow {
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -moz-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -moz-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
 }
 
 .flex-wrap {
@@ -3234,13 +3232,13 @@ nav.ecalendar-pagination {
 }
 
 .upcoming-events .btn.prev {
-    background-image: url(arrow_left.png) !important;
+    /*background-image: url(arrow_left.png) !important;*/
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
 
 .upcoming-events .btn.next {
-    background-image: url(arrow_right.png) !important;
+    /*background-image: url(arrow_right.png) !important;*/
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
@@ -3258,6 +3256,11 @@ nav.ecalendar-pagination {
 .meta-box-sortables input {
     vertical-align: middle;
     width: 30%;
+}
+
+
+.calendar ul.flex.date li.event-date:last-child .event-intro {
+    left: -330px;
 }
 
 

@@ -54,7 +54,7 @@ class Digital_Event_Calendar_Settings {
 
 
 	/**
-	 * Get Job Manager Settings
+	 * Get Event Calender Settings
 	 *
 	 * @return array
 	 */
@@ -94,7 +94,7 @@ class Digital_Event_Calendar_Settings {
 							'name'       => 'events_google_maps_api_key',
 							'std'        => '',
 							'label'      => __( 'Google Maps API Key', 'event-calender' ),
-							'desc'       => sprintf( __( 'Google requires an API key to retrieve location information for job listings. Acquire an API key from the <a href="%s">Google Maps API developer site</a>.', 'event-calender' ), 'https://developers.google.com/maps/documentation/geocoding/get-api-key' ),
+							'desc'       => sprintf( __( 'Google requires an API key to retrieve location information for Event Calender. Acquire an API key from the <a href="%s">Google Maps API developer site</a>.', 'event-calender' ), 'https://developers.google.com/maps/documentation/geocoding/get-api-key' ),
 							'attributes' => [],
 						],
 					],
@@ -105,14 +105,13 @@ class Digital_Event_Calendar_Settings {
 					__( 'Event Calendar', 'event-calender' ),
 					[
 						[
-							'name'        => 'events_per_page',
-							'std'         => '10',
-							'placeholder' => '',
-							'label'       => __( 'Listings Per Page', 'event-calender' ),
-							'desc'        => __( 'Number of job listings to display per page.', 'event-calender' ),
-							'attributes'  => [],
+							'name'        	=> 'events_per_page',
+							'std'         	=> '10',
+							'placeholder' 	=> '',
+							'label'       	=> __( 'Listings Per Page', 'event-calender' ),
+							'desc'        	=> __( 'Number of events to display per page.', 'event-calender' ),
+							'attributes'  	=> [],
 						],
-						
 					],
 				],
 
@@ -149,8 +148,7 @@ class Digital_Event_Calendar_Settings {
 						// 	'type'      => 'text',
 						// 	'label'     => __('Button BG Color', 'event-calender'),
 						// 	'default'   => 'ffffff',
-						// ],
-						
+						// ],	
 					],
 				],
 
@@ -159,15 +157,12 @@ class Digital_Event_Calendar_Settings {
 					__( 'Shortcode', 'event-calender' ),
 					[
 						[
-							'name'  	=> 'shortcode_lisft_page_idd',
-							'std'   	=> 'relative',
-							'desc'      => __( 'Copy this shortcode [event_calender]', 'event-calender' ),
-							'label' 	=> __( 'Shortcode list', 'event-calender' ),
-							'type'  	=> 'radio',
-							'options' => [
-								'relative' => __( '[event_calender]' ),
-								'default'  => __( 'Default date format as defined in Settings', 'digital-job-portal' ),
-							],
+							'name'  	=> 'shortcode_list_page_id',
+							'std'   	=> '[event_calender]',
+							'desc'      => __( '[event_calender]', 'event-calender' ),
+							'label' 	=> __( 'Shortcode', 'event-calender' ),
+							'type'  	=> 'text',
+							'default' 	=> 'SS'
 						],
 					],
 				],
@@ -200,8 +195,8 @@ class Digital_Event_Calendar_Settings {
 	public function output() {
 		$this->init_settings();
 		?>
-		<div class="wrap digital-job-portal-settings-wrap">
-			<form class="digital-job-portal-options" method="post" action="options.php">
+		<div class="wrap event-calender-settings-wrap">
+			<form class="event-calender-options" method="post" action="options.php">
 
 				<?php settings_fields( $this->settings_group ); ?>
 
@@ -217,7 +212,7 @@ class Digital_Event_Calendar_Settings {
 				// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Used for basic flow.
 				if ( ! empty( $_GET['settings-updated'] ) ) {
 					flush_rewrite_rules();
-					echo '<div class="updated fade digital-job-portal-updated"><p>' . esc_html__( 'Settings successfully saved', 'event-calender' ) . '</p></div>';
+					echo '<div class="updated fade event-calender-updated"><p>' . esc_html__( 'Settings successfully saved', 'event-calender' ) . '</p></div>';
 				}
 
 				foreach ( $this->settings as $key => $section ) {
@@ -263,13 +258,13 @@ class Digital_Event_Calendar_Settings {
 				jQuery( jQuery(this).attr('href') ).show();
 				jQuery(this).addClass('nav-tab-active');
 				window.location.hash = jQuery(this).attr('href');
-				jQuery( 'form.digital-job-portal-options' ).attr( 'action', 'options.php' + jQuery(this).attr( 'href' ) );
+				jQuery( 'form.event-calender-options' ).attr( 'action', 'options.php' + jQuery(this).attr( 'href' ) );
 				window.scrollTo( 0, 0 );
 				return false;
 			});
 			var goto_hash = window.location.hash;
 			if ( '#' === goto_hash.substr( 0, 1 ) ) {
-				jQuery( 'form.digital-job-portal-options' ).attr( 'action', 'options.php' + jQuery(this).attr( 'href' ) );
+				jQuery( 'form.event-calender-options' ).attr( 'action', 'options.php' + jQuery(this).attr( 'href' ) );
 			}
 			if ( goto_hash ) {
 				var the_tab = jQuery( 'a[href="' + goto_hash + '"]' );
@@ -281,17 +276,17 @@ class Digital_Event_Calendar_Settings {
 			} else {
 				jQuery( '.nav-tab-wrapper a:first' ).click();
 			}
-			var $use_standard_password_setup_email = jQuery('#setting-digital_job_portal_use_standard_password_setup_email');
-			var $generate_username_from_email = jQuery('#setting-digital_job_portal_generate_username_from_email');
-			var $digital_job_portal_registration_role = jQuery('#setting-digital_job_portal_registration_role');
+			var $use_standard_password_setup_email = jQuery('#setting-event_calender_use_standard_password_setup_email');
+			var $generate_username_from_email = jQuery('#setting-event_calender_generate_username_from_email');
+			var $event_calender_registration_role = jQuery('#setting-event_calender_registration_role');
 
-			jQuery('#setting-digital_job_portal_enable_registration').change(function(){
+			jQuery('#setting-event_calender_enable_registration').change(function(){
 				if ( jQuery( this ).is(':checked') ) {
-					$digital_job_portal_registration_role.closest('tr').show();
+					$event_calender_registration_role.closest('tr').show();
 					$use_standard_password_setup_email.closest('tr').show();
 					$generate_username_from_email.closest('tr').show();
 				} else {
-					$digital_job_portal_registration_role.closest('tr').hide();
+					$event_calender_registration_role.closest('tr').hide();
 					$use_standard_password_setup_email.closest('tr').hide();
 					$generate_username_from_email.closest('tr').hide();
 				}
@@ -403,13 +398,13 @@ class Digital_Event_Calendar_Settings {
 	}
 
 	/**
-	 * Radio input field.
-	 *
-	 * @param array  $option
-	 * @param array  $ignored_attributes
-	 * @param mixed  $value
-	 * @param string $ignored_placeholder
-	 */
+	* Radio input field.
+	*
+	* @param array  $option
+	* @param array  $ignored_attributes
+	* @param mixed  $value
+	* @param string $ignored_placeholder
+	*/
 	protected function input_radio( $option, $ignored_attributes, $value, $ignored_placeholder ) {
 		?>
 		<fieldset>
@@ -610,7 +605,7 @@ class Digital_Event_Calendar_Settings {
 			 * @param mixed  $value      Field value.
 			 * @param string $value      Placeholder text.
 			 */
-			do_action( 'wp_digital_job_portal_admin_field_' . $option['type'], $option, $attributes, $value, $placeholder );
+			do_action( 'wp_event_calender_admin_field_' . $option['type'], $option, $attributes, $value, $placeholder );
 		}
 		echo '</td></tr>';
 	}
@@ -623,31 +618,31 @@ class Digital_Event_Calendar_Settings {
 	 * @param array  $values
 	 * @param string $placeholder
 	 */
-	protected function input_multi_enable_expand( $option, $attributes, $values, $placeholder ) {
-		echo '<div class="setting-enable-expand">';
-		$enable_option               = $option['enable_field'];
-		$enable_option['name']       = $option['name'] . '[' . $enable_option['name'] . ']';
-		$enable_option['type']       = 'checkbox';
-		$enable_option['attributes'] = [ 'class="sub-settings-expander"' ];
+	// protected function input_multi_enable_expand( $option, $attributes, $values, $placeholder ) {
+	// 	echo '<div class="setting-enable-expand">';
+	// 	$enable_option               = $option['enable_field'];
+	// 	$enable_option['name']       = $option['name'] . '[' . $enable_option['name'] . ']';
+	// 	$enable_option['type']       = 'checkbox';
+	// 	$enable_option['attributes'] = [ 'class="sub-settings-expander"' ];
 
-		if ( isset( $enable_option['force_value'] ) && is_bool( $enable_option['force_value'] ) ) {
-			if ( true === $enable_option['force_value'] ) {
-				$values[ $option['enable_field']['name'] ] = '1';
-			} else {
-				$values[ $option['enable_field']['name'] ] = '0';
-			}
+	// 	if ( isset( $enable_option['force_value'] ) && is_bool( $enable_option['force_value'] ) ) {
+	// 		if ( true === $enable_option['force_value'] ) {
+	// 			$values[ $option['enable_field']['name'] ] = '1';
+	// 		} else {
+	// 			$values[ $option['enable_field']['name'] ] = '0';
+	// 		}
 
-			$enable_option['hidden_value'] = $values[ $option['enable_field']['name'] ];
-			$enable_option['attributes'][] = 'disabled="disabled"';
-		}
+	// 		$enable_option['hidden_value'] = $values[ $option['enable_field']['name'] ];
+	// 		$enable_option['attributes'][] = 'disabled="disabled"';
+	// 	}
 
-		$this->input_checkbox( $enable_option, $enable_option['attributes'], $values[ $option['enable_field']['name'] ], null );
+	// 	$this->input_checkbox( $enable_option, $enable_option['attributes'], $values[ $option['enable_field']['name'] ], null );
 
-		echo '<div class="sub-settings-expandable">';
-		$this->input_multi( $option, $attributes, $values, $placeholder );
-		echo '</div>';
-		echo '</div>';
-	}
+	// 	echo '<div class="sub-settings-expandable">';
+	// 	$this->input_multi( $option, $attributes, $values, $placeholder );
+	// 	echo '</div>';
+	// 	echo '</div>';
+	// }
 
 	/**
 	 * Multiple settings stored in one setting array.
@@ -657,15 +652,15 @@ class Digital_Event_Calendar_Settings {
 	 * @param array  $values
 	 * @param string $ignored_placeholder
 	 */
-	protected function input_multi( $option, $ignored_attributes, $values, $ignored_placeholder ) {
-		echo '<table class="form-table settings child-settings">';
-		foreach ( $option['settings'] as $sub_option ) {
-			$value              = isset( $values[ $sub_option['name'] ] ) ? $values[ $sub_option['name'] ] : $sub_option['std'];
-			$sub_option['name'] = $option['name'] . '[' . $sub_option['name'] . ']';
-			$this->output_field( $sub_option, $value );
-		}
-		echo '</table>';
-	}
+	// protected function input_multi( $option, $ignored_attributes, $values, $ignored_placeholder ) {
+	// 	echo '<table class="form-table settings child-settings">';
+	// 	foreach ( $option['settings'] as $sub_option ) {
+	// 		$value              = isset( $values[ $sub_option['name'] ] ) ? $values[ $sub_option['name'] ] : $sub_option['std'];
+	// 		$sub_option['name'] = $option['name'] . '[' . $sub_option['name'] . ']';
+	// 		$this->output_field( $sub_option, $value );
+	// 	}
+	// 	echo '</table>';
+	// }
 
 	/**
 	 * Proxy for text input field.
@@ -675,7 +670,7 @@ class Digital_Event_Calendar_Settings {
 	 * @param mixed  $value
 	 * @param string $placeholder
 	 */
-	protected function input_input( $option, $attributes, $value, $placeholder ) {
-		$this->input_text( $option, $attributes, $value, $placeholder );
-	}
+	// protected function input_input( $option, $attributes, $value, $placeholder ) {
+	// 	$this->input_text( $option, $attributes, $value, $placeholder );
+	// }
 }

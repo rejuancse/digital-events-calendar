@@ -21,8 +21,7 @@ class Calendar_Shortcode {
     private $naviHref       = null;
     private $navImg         = null;
      
-    /*------------------ PUBLIC *------------------*/  
-        
+    /*------------------ PUBLIC *------------------*/    
     /**
     * Print out the calendar 
     */
