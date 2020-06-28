@@ -52,6 +52,7 @@ class Digital_Event_Calendar_Settings {
 		add_action( 'admin_init', [ $this, 'register_settings' ] );
 	}
 
+
 	/**
 	 * Get Job Manager Settings
 	 *
@@ -125,30 +126,30 @@ class Digital_Event_Calendar_Settings {
 							'label'     => __('Major Color', 'event-calender'),
 							'default'   => 'ffffff',
 						],
-						[
-							'name'       => 'event_primary_color',
-							'type'      => 'text',
-							'label'     => __('Hover Color', 'event-calender'),
-							'default'   => 'ffffff',
-						],
-						[
-							'name'       => 'button_text_color',
-							'type'      => 'text',
-							'label'     => __('Button Color', 'event-calender'),
-							'default'   => 'ffffff',
-						],
-						[
-							'name'       => 'button_text_hover_color',
-							'type'      => 'text',
-							'label'     => __('Button Hover Color', 'event-calender'),
-							'default'   => 'ffffff',
-						],
-						[
-							'name'       => 'button_BG_color',
-							'type'      => 'text',
-							'label'     => __('Button BG Color', 'event-calender'),
-							'default'   => 'ffffff',
-						],
+						// [
+						// 	'name'       => 'event_primary_color',
+						// 	'type'      => 'text',
+						// 	'label'     => __('Hover Color', 'event-calender'),
+						// 	'default'   => 'ffffff',
+						// ],
+						// [
+						// 	'name'       => 'button_text_color',
+						// 	'type'      => 'text',
+						// 	'label'     => __('Button Color', 'event-calender'),
+						// 	'default'   => 'ffffff',
+						// ],
+						// [
+						// 	'name'       => 'button_text_hover_color',
+						// 	'type'      => 'text',
+						// 	'label'     => __('Button Hover Color', 'event-calender'),
+						// 	'default'   => 'ffffff',
+						// ],
+						// [
+						// 	'name'       => 'button_BG_color',
+						// 	'type'      => 'text',
+						// 	'label'     => __('Button BG Color', 'event-calender'),
+						// 	'default'   => 'ffffff',
+						// ],
 						
 					],
 				],

@@ -3259,3 +3259,39 @@ nav.ecalendar-pagination {
     vertical-align: middle;
     width: 30%;
 }
+
+
+
+
+@media (max-width: 767px){
+    .calendar .date .event-date .info {
+        display: none;
+    }
+    .calendar .date li {
+        min-height: inherit;
+        padding: 20px 20px 20px 20px;
+    }
+    .calendar .date .event-date:hover .event-intro {
+        left: 50%;
+        top: 0;
+        width: 265px;
+        display: block;
+        transform: translate(-50%, 15%);
+    }
+}
+
+@media (max-width: 414px){
+    .calendar .date li {
+        min-height: inherit;
+        padding: 20px 18px 20px 21px;
+        width: 53px;
+    }
+}
+
+@media (max-width: 375px){
+    .calendar .date li {
+        min-height: inherit;
+        padding: 20px 18px 20px 21px;
+        width: 47.5px;
+    }
+}

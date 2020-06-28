@@ -21,8 +21,14 @@ final class Events_Calender {
 		$this->include_shortcode();
 		$this->events = new \DEC\EVENT\Events();
 
+        add_action( 'wp_head', array( $this, 'style_custom_css' ) );
 		add_action( 'wp_ajax_edisplaynextmonth', array( $this, 'event_display_nextmonth' ) );
         add_action( 'wp_ajax_nopriv_edisplaynextmonth', array( $this, 'event_display_nextmonth' ) );
+	}
+
+	# Custom css style. 
+	public function style_custom_css() {
+		require_once DEC_DIR_PATH.'includes/compatibility/Admin_Menu.php';
 	}
 	
 	# Include Shortcode

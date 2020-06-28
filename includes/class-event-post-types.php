@@ -89,39 +89,6 @@ class DEC_Post_Types {
 			'rewrite'               => array( 'slug' => 'event-category' ),
 		);
 		register_taxonomy( 'event_cat', 'event', $args );
-
-		/**
-		* Taxonomy: Tag
-		*/
-		$labels = array(
-			'menu_name'                  => __( 'Event Tags', 'event-calender' ),
-			'name'                       => _x( 'Event Tags', 'taxonomy general name', 'event-calender' ),
-			'singular_name'              => _x( 'Event Tag', 'taxonomy singular name', 'event-calender' ),
-			'search_items'               => __( 'Search Tags', 'event-calender' ),
-			'popular_items'              => __( 'Popular Tags', 'event-calender' ),
-			'all_items'                  => __( 'All Event Tags', 'event-calender' ),
-			'parent_item'                => null,
-			'parent_item_colon'          => null,
-			'edit_item'                  => __( 'Edit Tag', 'event-calender' ),
-			'update_item'                => __( 'Update Tag', 'event-calender' ),
-			'add_new_item'               => __( 'Add New Tag', 'event-calender' ),
-			'new_item_name'              => __( 'New Tag Name', 'event-calender' ),
-			'separate_items_with_commas' => __( 'Separate Tags with commas', 'event-calender' ),
-			'add_or_remove_items'        => __( 'Add or remove Tags', 'event-calender' ),
-			'choose_from_most_used'      => __( 'Choose from the most used Tags', 'event-calender' ),
-			'not_found'                  => __( 'No Tags found.', 'event-calender' ),
-		);
-		$args = array(
-			'hierarchical'          => false,
-			'labels'                => $labels,
-			'show_ui'               => true,
-			'show_admin_column'     => true,
-			'update_count_callback' => '_update_post_term_count',
-			'query_var'             => true,
-			'show_in_rest'          => true,
-			'rewrite'               => array( 'slug' => 'event-tag' ),
-		);
-		register_taxonomy( 'event-tag', 'event', $args );
 	}
 
 	function event_updated_messages( $messages ){

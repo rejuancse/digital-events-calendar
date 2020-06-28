@@ -2,7 +2,7 @@
 /**
 * File containing the class Digital_Event_Calendar_Admin.
 *
-* @package digital-job-portal
+* @package Digital-Event Calender
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -44,9 +44,7 @@ class Digital_Event_Calendar_Admin {
 	public function __construct() {
 		global $wp_version;
 
-
 		include_once dirname( __FILE__ ) . '/class-digital-event-calendar-settings.php';
-
 		$this->settings_page = Digital_Event_Calendar_Settings::instance();
 
 		add_action( 'admin_init', [ $this, 'admin_init' ] );
@@ -54,6 +52,8 @@ class Digital_Event_Calendar_Admin {
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_enqueue_scripts' ] );
 	}
 
+
+	
 	/**
 	* Set up actions during admin initialization.
 	*/
