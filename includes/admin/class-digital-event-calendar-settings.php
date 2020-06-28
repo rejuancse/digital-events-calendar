@@ -145,7 +145,7 @@ class Digital_Event_Calendar_Settings {
 						],
 						[
 							'name'       => 'button_BG_color',
-							'type'      => 'color',
+							'type'      => 'text',
 							'label'     => __('Button BG Color', 'event-calender'),
 							'default'   => 'ffffff',
 						],
