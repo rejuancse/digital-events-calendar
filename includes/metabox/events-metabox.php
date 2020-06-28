@@ -19,3 +19,4 @@
 	<label for="product_name">Event Location: </label>
 	<input id="event_location" type="text" name="event_location" value="<?php echo $event_location; ?>">
 </p>
+

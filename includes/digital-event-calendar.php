@@ -57,7 +57,6 @@ class Digital_Event_Calendar {
 		wp_enqueue_script( 'calender-admin', DEC_URI .'assets/js/admin.js', array('jquery', 'wp-color-picker'), '', true );
 	}
 
-	# Text Word Limit
 	function limit_word_text($text, $limit) {
         if ( $this->mb_str_word_count($text, 0) > $limit ) {
             $words  = $this->mb_str_word_count($text, 2);

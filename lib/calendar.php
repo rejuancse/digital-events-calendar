@@ -94,13 +94,14 @@ class Calendar_Shortcode {
 
 
                                     $desc = DEC()->limit_word_text(strip_tags(get_the_content()), 130);
+                                    
+                                    // print_r($desc);
+                                    // die();
 
                                     // $events_date = get_post_meta(get_the_ID(), 'ecalendar_event_start_datetime', true);
                                     
                                     $edate = get_post_meta(get_the_ID(), 'event_start_date', true);
                                     $etime = get_post_meta(get_the_ID(), 'event_start_time', true);
-
-                                    $location           = rwmb_meta('event_location');
 
                                     $events_date = $edate.' '.$etime;
 
@@ -648,22 +649,25 @@ class Calendar_Shortcode {
                                         $events_query  = new \WP_Query( $events_args );
                                         if ( $events_query->have_posts() ) :  
                                             while ( $events_query->have_posts() ) : $events_query->the_post(); 
-
-                                                $desc = DEC()->limit_word_text(strip_tags(get_the_content()), 130);   
+                                                // $events_date = get_post_meta(get_the_ID(), 'ecalendar_event_start_datetime', true);
+                                                
                                                 $edate = get_post_meta(get_the_ID(), 'event_start_date', true);
                                                 $etime = get_post_meta(get_the_ID(), 'event_start_time', true);
 
                                                 $events_date = $edate.' '.$etime;
 
-                                                $events_title   = get_the_title();
-                                                $get_image      = esc_url( wp_get_attachment_url( get_post_thumbnail_id(get_the_ID())));
+
+                                                $events_title                       = get_the_title();
+                                                // $highlighted_text                   = ecalendar_excerpt_max_charlength(180);
+
+                                                $get_image   = esc_url( wp_get_attachment_url( get_post_thumbnail_id(get_the_ID())));
                                                 $events_date = substr($events_date, 0, strrpos($events_date, ' '));
 
                                                 array_push( $ev_array, date("d F Y", strtotime($events_date)) );
                                                 array_push( $ev_title_array, $events_title );
                                                 array_push( $ev_permalink_array, esc_url(get_the_permalink()) );
                                                 array_push( $img_arr, $get_image );
-                                                array_push( $ev_summary_array, $desc );
+                                                array_push( $ev_summary_array, $highlighted_text );
 
                                                 if($events_query->post_count == ($events_query->current_post + 1)){
                                                     $newevarray = $ev_array;
