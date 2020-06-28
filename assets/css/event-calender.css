@@ -3279,7 +3279,6 @@ nav.ecalendar-pagination {
         transform: translate(-50%, 15%);
     }
 }
-
 @media (max-width: 414px){
     .calendar .date li {
         min-height: inherit;
@@ -3287,7 +3286,6 @@ nav.ecalendar-pagination {
         width: 53px;
     }
 }
-
 @media (max-width: 375px){
     .calendar .date li {
         min-height: inherit;
