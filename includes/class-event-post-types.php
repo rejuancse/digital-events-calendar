@@ -52,7 +52,7 @@ class DEC_Post_Types {
 			'has_archive'        	=> true,
 			'hierarchical'       	=> false,
 			'menu_position'      	=> null,
-			'menu_icon'				=> 'dashicons-welcome-write-blog',
+			'menu_icon'				=> 'dashicons-art',
 			'supports'           	=> array( 'title','editor','thumbnail','comments')
 		);
 		register_post_type(' event ', $args);
