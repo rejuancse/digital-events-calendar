@@ -28,8 +28,3 @@ if (!class_exists( 'Events_Calender' )) {
     require_once DEC_DIR_PATH . 'includes/Events_Calender.php';
     new \DEC\Events_Calender();
 }
-
-# Metabox Include
-// include_once( 'post-type/meta_box.php' );
-// include_once( 'post-type/meta-box/meta-box.php' );
-// include_once( 'post-type/meta-box-group/meta-box-group.php' );

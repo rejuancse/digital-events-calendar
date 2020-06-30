@@ -91,13 +91,7 @@ class Calendar_Shortcode {
                             if ( $events_query->have_posts() ) :  
                                 while ( $events_query->have_posts() ) : $events_query->the_post(); 
 
-
                                     $desc = DEC()->limit_word_text(strip_tags(get_the_content()), 130);
-                                    
-                                    // print_r($desc);
-                                    // die();
-
-                                    // $events_date = get_post_meta(get_the_ID(), 'ecalendar_event_start_datetime', true);
                                     
                                     $edate = get_post_meta(get_the_ID(), 'event_start_date', true);
                                     $etime = get_post_meta(get_the_ID(), 'event_start_time', true);

@@ -75,6 +75,4 @@ class Events {
 	}
 	# End Save Function.
 	
-
-
 }
