@@ -1,12 +1,20 @@
 <?php
 /*
-* Plugin Name: Digital Events Calendar
-* Author: Rejuan Ahamed
-* Description: Event Calender is a all events calender listing.
-* License - GNU/GPL V2 or Later
-* Version: 1.0.0
-* Text Domain: event-calender
+* Plugin Name:       Digital Events Calendar
+* Plugin URI:        https://demo.rejuandev.live/event-calender/
+* Description:       Event Calender is a all events calender listing.
+* Version:           1.0.0
+* Author:            Rejuan Ahamed
+* Author URI:        https://rejuandev.live/
+* Text Domain:       event-calender
+* Requires at least: 4.5
+* Tested up to:      5.4
+* License:           GPL-2.0+
+* License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+* Domain Path:       /languages
 */
+
+
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit; # Exit if accessed directly
