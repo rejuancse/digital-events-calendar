@@ -1,6 +1,6 @@
-.box, #sidebar .widget {
+/*.box, #sidebar .widget {
     background: rgba(0,0,0,0.8);
-}
+}*/
 .box, #sidebar .widget {
     position: relative;
     padding: 30px;
@@ -139,9 +139,12 @@
 .event .media .media-body .media-heading {
     margin: 0 0 10px;
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     line-height: 30px;
+    font-size: 22px;
+}
+.event .media .media-body .media-heading a,
+.event .pull-left .event-tabs li a {
+    text-decoration: none;
 }
 ul.event-content {
     list-style: none;
@@ -167,4 +170,13 @@ ul.event-content li span.heading-side {
 }
 ul.event-content li span.info-side {
     color: #999;
+}
+
+
+.latest-event-content .pull-left {
+    width: 30%;
+}
+.latest-event-content .media-body {
+    width: 67%;
+    float: right;
 }

@@ -78,15 +78,7 @@ class Events_Listing {
                                 <li><span class="heading-side">Location: </span><span class="info-side"> Dhanmondi, Dhaka</span></li>
                                 <li><span class="heading-side">Date: </span><span class="info-side">February 14, 2020</span></li>
                                 <li><span class="heading-side">Time: </span><span class="info-side">10:00 am</span></li>
-                                <li>
-                                    <span class="heading-side">Ticket Price: </span>
-                                    <span class="info-side">
-                                                                                                <a href="#">
-                                            
-                                            $199
-                                                                                                    </a>
-                                                                                            </span>
-                                </li>
+                                
                             </ul>
                         </div> 
                     </div>
