@@ -53,7 +53,8 @@ class Events_Listing {
 
 
         <?php if ( $data->have_posts() ) :
-        while ( $data->have_posts() ) : $data->the_post(); ?>
+        while ( $data->have_posts() ) : $data->the_post(); 
+            $datetime       = get_post_meta(get_the_ID(),'event_start_date',true); ?>
 
 
             <div id="post-814" class="post-814 event type-event status-publish has-post-thumbnail hentry event_cat-floral-pavilion event_cat-national-party">
@@ -61,41 +62,41 @@ class Events_Listing {
                 <div class="media">
                     <div class="pull-left">
                         <a href="<?php the_permalink(); ?>">
-                            <?php the_post_thumbnail('full', array('class' => 'img-responsive wp-post-image')); ?>      
+                            <?php the_post_thumbnail('full', array('class' => 'img-responsive wp-post-image')); ?>     
                         </a>
                         
                         <ul class="event-tabs">
-                            <li class="tab-first active"><a href="https://demo.themeum.com/wordpress/vocal/event/orchestra-and-ensembles-concert/"><span class="date">Feb<span>14</span></span></a></li>
-                            <li class="tab-second"><a href="https://demo.themeum.com/wordpress/vocal/event/orchestra-and-ensembles-concert/#event-map-layout"><span><i class="fa fa-map-marker"></i></span></a></li>
-                            <li class="tab-third"><a href="https://demo.themeum.com/wordpress/vocal/event/orchestra-and-ensembles-concert/#pricing-table"><span><i class="fa fa-shopping-cart"></i></span></a></li>
+                            <li class="tab-first active">
+                                <a href="<?php echo get_permalink(); ?>">
+                                    <span class="date"><?php echo date_i18n("M", strtotime($datetime)); ?>
+                                        <span><?php echo date_i18n("d", strtotime($datetime)); ?></span>
+                                    </span>
+                                </a>
+                            </li>
+                                    
+                            <li class="tab-second">
+                                <a href="#">
+                                    <span><i class="fa fa-map-marker"></i></span>
+                                </a>
+                            </li>
                         </ul>
-
                     </div>
+
                     <div class="media-body">
                         <div class="event-details">
-                            <h3 class="media-heading"><a href="<?php the_permalink(); ?>"><?php echo get_the_title(); ?></a></h3>
+                            <h3 class="media-heading">
+                                <a href="<?php the_permalink(); ?>"><?php echo get_the_title(); ?></a>
+                            </h3>
                             <ul class="event-content">
                                 <li><span class="heading-side">Location: </span><span class="info-side"> Dhanmondi, Dhaka</span></li>
                                 <li><span class="heading-side">Date: </span><span class="info-side">February 14, 2020</span></li>
                                 <li><span class="heading-side">Time: </span><span class="info-side">10:00 am</span></li>
-                                
                             </ul>
                         </div> 
                     </div>
                 </div>
 
             </div>
-
-
-
-
-
-
-
-
-            
-
-            
 
         <?php
         endwhile;
@@ -105,10 +106,7 @@ class Events_Listing {
         </div>
         </div>
 
-
         <?php
-
-
         return $html;
 
     }

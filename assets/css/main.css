@@ -14,7 +14,7 @@
 
 .event .media {
     margin-bottom: 30px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: #fafafa;
 }
 
 .media:first-child {
@@ -105,7 +105,7 @@
 .media .pull-left .event-tabs li {
     display: block;
     width: 60px;
-    height: 33.333333%;
+    height: 50%;
     text-align: center;
 }
 .event .pull-left .event-tabs li.tab-third a {
@@ -124,6 +124,7 @@
 .event .pull-left .event-tabs li a > span {
     display: table-cell;
     vertical-align: middle;
+    font-size: 14px;
 }
 .event .media .media-body {
     padding: 30px 20px 20px 80px;
@@ -153,7 +154,8 @@ ul.event-content {
 }
 ul.event-content li {
     display: block;
-    margin: 5px 0;
+    margin: 0px 0;
+    line-height: initial;
 }
 ul.event-content li span.heading-side {
     display: inline-block;
@@ -167,11 +169,21 @@ ul.event-content li span.heading-side {
     display: inline-block;
     width: 25%;
     font-weight: bold;
+    font-family: Dosis;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
 }
 ul.event-content li span.info-side {
     color: #999;
+    font-family: Dosis;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 16px;
 }
-
+.event .media .pull-left img {
+    min-height: 185px;
+}
 
 .latest-event-content .pull-left {
     width: 30%;
@@ -179,4 +191,9 @@ ul.event-content li span.info-side {
 .latest-event-content .media-body {
     width: 67%;
     float: right;
+}
+.event .pull-left .event-tabs li a > span.date span {
+    display: block;
+    font-size: 24px;
+    line-height: 24px;
 }
