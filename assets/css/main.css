@@ -197,3 +197,6 @@ ul.event-content li span.info-side {
     font-size: 24px;
     line-height: 24px;
 }
+.wp-block-table td {
+    border-color: transparent !important;
+}

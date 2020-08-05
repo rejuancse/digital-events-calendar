@@ -3,7 +3,7 @@
 * Plugin Name:       Digital Events Calendar
 * Plugin URI:        https://demo.rejuandev.live/event-calender/
 * Description:       Event Calender is a all events calender listing.
-* Version:           1.0.0
+* Version:           1.0.1
 * Author:            Rejuan Ahamed
 * Author URI:        https://rejuandev.live/
 * Text Domain:       event-calender

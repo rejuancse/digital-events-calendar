@@ -28,7 +28,7 @@ class Calendar_Shortcode {
 
         $year  = '';
         $month = '';
-        $content = $newevarray = '';
+        $content = $newevarray = $get_final_array = '';
          
         if(isset($_GET['year'])){
             $year = (int) sanitize_text_field($_GET['year']);
@@ -47,415 +47,410 @@ class Calendar_Shortcode {
          
         $content .= '<div class="upcoming-events">'.
             $this->_createNavi().
-            '<div class="row">
-                <div class="col-md-12">                   
-                    <div class="calendar">';
-                    $content .=
-                        '<ul class="flex day">'.$this->_createLabels().'</ul>';       
-                        $content.='<ul class="flex date">'; 
+            '<div class="calendar">';
+                $content .=
+                    '<ul class="flex day">'.$this->_createLabels().'</ul>';       
+                    $content.='<ul class="flex date">'; 
 
-                            $weeksInMonth = $this->_weeksInMonth($month,$year);
-                            // Create weeks in a month
-                            $week_inc = 1;
-                            for( $i=0; $i<$weeksInMonth; $i++ ):
-                                # Create days in a week
-                                for( $j=1; $j<=7; $j++ ):
-                                if($this->currentDay==0){
-                                    $firstDayOfTheWeek = date('N',strtotime($this->currentYear.'-'.$this->currentMonth.'-01'));  
-                                    if(intval($i*7+$j) == intval($firstDayOfTheWeek)){ 
-                                        $this->currentDay=1; 
-                                    }
+                        $weeksInMonth = $this->_weeksInMonth($month,$year);
+                        // Create weeks in a month
+                        $week_inc = 1;
+                        for( $i=0; $i<$weeksInMonth; $i++ ):
+                            # Create days in a week
+                            for( $j=1; $j<=7; $j++ ):
+                            if($this->currentDay==0){
+                                $firstDayOfTheWeek = date('N',strtotime($this->currentYear.'-'.$this->currentMonth.'-01'));  
+                                if(intval($i*7+$j) == intval($firstDayOfTheWeek)){ 
+                                    $this->currentDay=1; 
                                 }
-                                 
-                                if( ($this->currentDay!=0)&&($this->currentDay<=$this->daysInMonth) ){
-                                    $this->currentDate = date('Y-m-d',strtotime($this->currentYear.'-'.$this->currentMonth.'-'.($this->currentDay)));
-                                    $cellContent = $this->currentDay;
-                                    $this->currentDay++;   
-                                }else{
-                                    $this->currentDate =null;
-                                    $cellContent=null;
-                                }
+                            }
+                             
+                            if( ($this->currentDay!=0)&&($this->currentDay<=$this->daysInMonth) ){
+                                $this->currentDate = date('Y-m-d',strtotime($this->currentYear.'-'.$this->currentMonth.'-'.($this->currentDay)));
+                                $cellContent = $this->currentDay;
+                                $this->currentDay++;   
+                            }else{
+                                $this->currentDate =null;
+                                $cellContent=null;
+                            }
 
 
-                            $ev_array           = array();
-                            $img_arr            = array();
-                            $ev_title_array     = array();
-                            $ev_permalink_array = array();
-                            $ev_summary_array   = array();
-                            $events_args = array(
-                                    'post_type'     => 'event',
-                                    'post_status'   => 'publish'
-                                );
+                        $ev_array           = array();
+                        $img_arr            = array();
+                        $ev_title_array     = array();
+                        $ev_permalink_array = array();
+                        $ev_summary_array   = array();
+                        $events_args = array(
+                                'post_type'     => 'event',
+                                'post_status'   => 'publish'
+                            );
 
-                            $events_query  = new \WP_Query( $events_args );
-                            if ( $events_query->have_posts() ) :  
-                                while ( $events_query->have_posts() ) : $events_query->the_post(); 
+                        $events_query  = new \WP_Query( $events_args );
+                        if ( $events_query->have_posts() ) :  
+                            while ( $events_query->have_posts() ) : $events_query->the_post(); 
 
-                                    // $newevarray = '';
-                                    $desc = DEC()->limit_word_text(strip_tags(get_the_content()), 130);
-                                    
-                                    $edate = get_post_meta(get_the_ID(), 'event_start_date', true);
-                                    $etime = get_post_meta(get_the_ID(), 'event_start_time', true);
-
-                                    $events_date = $edate.' '.$etime;
-
-                                    $events_title   = get_the_title();
-                                    $get_image      = esc_url( wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()) ) );
-                                    $events_date    = substr($events_date, 0, strrpos($events_date, ' '));
-
-                                    array_push( $ev_array, date("d F Y", strtotime($events_date)) );
-                                    array_push( $ev_title_array, $events_title );
-                                    array_push( $ev_permalink_array, esc_url(get_the_permalink()) );
-                                    array_push( $img_arr, $get_image );
-                                    array_push( $ev_summary_array, $desc );
-
-                                    if($events_query->post_count == ($events_query->current_post + 1)){
-                                        $newevarray = $ev_array; 
-                                    }
-                                    
-                                    if (!empty($newevarray)) {
-                                        $get_newevarray  = implode(' ', $newevarray);
-                                    }
-
-                                    if (!empty($get_newevarray)) {
-                                        $get_final_array = explode(' ', $get_newevarray);
-                                        $get_final_array = preg_match('/value="(\d*)"/', $get_final_array[0], $get_newevarray);
-                                    }
+                                $desc = DEC()->limit_word_text(strip_tags(get_the_content()), 130);
                                 
-                                endwhile; 
+                                $edate = get_post_meta(get_the_ID(), 'event_start_date', true);
+                                $etime = get_post_meta(get_the_ID(), 'event_start_time', true);
+
+                                $events_date = $edate.' '.$etime;
+
+                                $events_title   = get_the_title();
+                                $get_image      = esc_url( wp_get_attachment_url( get_post_thumbnail_id(get_the_ID()) ) );
+                                $events_date    = substr($events_date, 0, strrpos($events_date, ' '));
+
+                                array_push( $ev_array, date("d F Y", strtotime($events_date)) );
+                                array_push( $ev_title_array, $events_title );
+                                array_push( $ev_permalink_array, esc_url(get_the_permalink()) );
+                                array_push( $img_arr, $get_image );
+                                array_push( $ev_summary_array, $desc );
+
+                                if($events_query->post_count == ($events_query->current_post + 1)){
+                                    $newevarray = $ev_array; 
+                                }
+                                
+                                if (!empty($newevarray)) {
+                                    $get_newevarray  = implode(' ', $newevarray);
+                                }
+
+                                if (!empty($get_newevarray)) {
+                                    $get_final_array = explode(' ', $get_newevarray);
+                                }
+                            
+                            endwhile; 
+                        endif;
+                        
+                        $get_final_array = preg_match('/value="(\d*)"/', $get_final_array, $get_newevarray);
+                        $month_number1  = date("n",strtotime($get_final_array[1]));
+                        $month_number2  = date("n",strtotime($get_final_array[4]));
+                        $month_number3  = date("n",strtotime($get_final_array[7]));
+                        $month_number4  = date("n",strtotime($get_final_array[10]));
+                        $month_number5  = date("n",strtotime($get_final_array[13]));
+                        $month_number6  = date("n",strtotime($get_final_array[16]));
+                        $month_number7  = date("n",strtotime($get_final_array[19]));
+                        $month_number8  = date("n",strtotime($get_final_array[22]));
+                        $month_number9  = date("n",strtotime($get_final_array[25]));
+                        $month_number10 = date("n",strtotime($get_final_array[28]));
+                        $month_number11 = date("n",strtotime($get_final_array[31]));
+                        $month_number12 = date("n",strtotime($get_final_array[34]));
+                        $month_number13 = date("n",strtotime($get_final_array[37]));
+                        $month_number14 = date("n",strtotime($get_final_array[40]));
+                        $month_number15 = date("n",strtotime($get_final_array[44]));
+                        $month_number16 = date("n",strtotime($get_final_array[47]));
+                        $month_number17 = date("n",strtotime($get_final_array[51]));
+                        $month_number18 = date("n",strtotime($get_final_array[54]));
+                        $month_number19 = date("n",strtotime($get_final_array[57]));
+                        $month_number20 = date("n",strtotime($get_final_array[61]));
+                        $month_number21 = date("n",strtotime($get_final_array[64]));
+                        $month_number22 = date("n",strtotime($get_final_array[67]));
+                        $month_number23 = date("n",strtotime($get_final_array[70]));
+                        $month_number24 = date("n",strtotime($get_final_array[73]));
+                        $month_number25 = date("n",strtotime($get_final_array[76]));
+
+
+                        if( $get_final_array[0] == $cellContent && $month_number1 == $this->currentMonth && $get_final_array[2] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[0].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></h2>
+                                        <p>'.$ev_summary_array[0].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[0].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        }elseif ( $get_final_array[3] == $cellContent && $month_number2 == $this->currentMonth && $get_final_array[5] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[1].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></h2>
+                                        <p>'.$ev_summary_array[1].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[1].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        }elseif ( $get_final_array[6] == $cellContent && $month_number3 == $this->currentMonth && $get_final_array[8] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            
+                            $content .= '<span class="info">
+                                <a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a>
+                                </span>';
+
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[2].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a></h2>
+                                        <p>'.$ev_summary_array[2].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[2].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[9] == $cellContent && $month_number4 == $this->currentMonth && $get_final_array[11] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[3].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></h2>
+                                        <p>'.$ev_summary_array[3].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[3].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[12] == $cellContent && $month_number5 == $this->currentMonth && $get_final_array[14] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[4].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></h2>
+                                        <p>'.$ev_summary_array[4].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[4].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[15] == $cellContent && $month_number6 == $this->currentMonth && $get_final_array[17] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[5].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></h2>
+                                        <p>'.$ev_summary_array[5].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[5].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[18] == $cellContent && $month_number7 == $this->currentMonth && $get_final_array[20] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[6].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></h2>
+                                        <p>'.$ev_summary_array[6].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[6].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[21] == $cellContent && $month_number8 == $this->currentMonth && $get_final_array[23] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[7].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></h2>
+                                        <p>'.$ev_summary_array[7].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[7].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[24] == $cellContent && $month_number9 == $this->currentMonth && $get_final_array[26] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[8].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></h2>
+                                        <p>'.$ev_summary_array[8].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[8].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[27] == $cellContent && $month_number10 == $this->currentMonth && $get_final_array[29] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[9].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></h2>
+                                        <p>'.$ev_summary_array[9].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[9].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[30] == $cellContent && $month_number11 == $this->currentMonth && $get_final_array[32] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[10].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></h2>
+                                        <p>'.$ev_summary_array[10].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[10].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[33] == $cellContent && $month_number12 == $this->currentMonth && $get_final_array[35] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[11].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></h2>
+                                        <p>'.$ev_summary_array[11].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[11].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>'; 
+                        } elseif ( $get_final_array[36] == $cellContent && $month_number13 == $this->currentMonth && $get_final_array[38] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[12].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></h2>
+                                        <p>'.$ev_summary_array[12].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[12].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>'; 
+                        } elseif ( $get_final_array[39] == $cellContent && $month_number14 == $this->currentMonth && $get_final_array[41] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[13].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></h2>
+                                        <p>'.$ev_summary_array[13].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[13].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[42] == $cellContent && $month_number15 == $this->currentMonth && $get_final_array[44] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[14].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></h2>
+                                        <p>'.$ev_summary_array[14].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[14].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[45] == $cellContent && $month_number16 == $this->currentMonth && $get_final_array[47] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[15].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></h2>
+                                        <p>'.$ev_summary_array[15].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[15].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[48] == $cellContent && $month_number17 == $this->currentMonth && $get_final_array[50] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[16].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></h2>
+                                        <p>'.$ev_summary_array[16].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[16].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[51] == $cellContent && $month_number18 == $this->currentMonth && $get_final_array[53] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[17].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></h2>
+                                        <p>'.$ev_summary_array[17].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[17].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>'; 
+                        } elseif ( $get_final_array[54] == $cellContent && $month_number19 == $this->currentMonth && $get_final_array[56] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[18].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></h2>
+                                        <p>'.$ev_summary_array[18].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[18].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[57] == $cellContent && $month_number20 == $this->currentMonth && $get_final_array[59] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[19].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></h2>
+                                        <p>'.$ev_summary_array[19].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[19].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[61] == $cellContent && $month_number21 == $this->currentMonth && $get_final_array[62] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[20].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></h2>
+                                        <p>'.$ev_summary_array[20].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[20].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[63] == $cellContent && $month_number22 == $this->currentMonth && $get_final_array[65] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[21].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></h2>
+                                        <p>'.$ev_summary_array[21].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[21].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[66] == $cellContent && $month_number23 == $this->currentMonth && $get_final_array[68] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[22].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></h2>
+                                        <p>'.$ev_summary_array[22].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[22].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>'; 
+                        } elseif ( $get_final_array[69] == $cellContent && $month_number24 == $this->currentMonth && $get_final_array[71] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[23].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></h2>
+                                        <p>'.$ev_summary_array[23].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[23].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';
+                        } elseif ( $get_final_array[72] == $cellContent && $month_number25 == $this->currentMonth && $get_final_array[74] == $this->currentYear){
+                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                            $content .= '<span class="info"><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></span>';
+                            $content .= '<div class="event-intro">
+                                    <img src="'.$img_arr[24].'">
+                                    <div class="event-content">
+                                        <h2><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></h2>
+                                        <p>'.$ev_summary_array[24].'</p>
+                                        <a class="btn" href="'.$ev_permalink_array[24].'">'.__('Event Details', 'event-calender').'</a>
+                                    </div>
+                                </div></li>';                                                                                                                         
+                        }else {
+                            $dateTime = new \DateTime();
+                            $compare_date = $dateTime->format('d');
+                            if ($compare_date <= $cellContent) {
+                                $content .= '<li><span class="recent-date">'.$cellContent.'</span></li>';
+                            }else {
+                                $content .= '<li><span class="past-date">'.$cellContent.'</span></li>';
+                            }
+                        }                                        
+
+                            if( $j == 7 ):
+                                $content.='</ul>';
+                                if( $week_inc !=6 ):
+                                    $content.='<ul class="flex date">';     
+                                endif;
                             endif;
 
-                            $month_number1  = date("n",strtotime($get_final_array[1]));
-                            $month_number2  = date("n",strtotime($get_final_array[4]));
-                            $month_number3  = date("n",strtotime($get_final_array[7]));
-                            $month_number4  = date("n",strtotime($get_final_array[10]));
-                            $month_number5  = date("n",strtotime($get_final_array[13]));
-                            $month_number6  = date("n",strtotime($get_final_array[16]));
-                            $month_number7  = date("n",strtotime($get_final_array[19]));
-                            $month_number8  = date("n",strtotime($get_final_array[22]));
-                            $month_number9  = date("n",strtotime($get_final_array[25]));
-                            $month_number10 = date("n",strtotime($get_final_array[28]));
-                            $month_number11 = date("n",strtotime($get_final_array[31]));
-                            $month_number12 = date("n",strtotime($get_final_array[34]));
-                            $month_number13 = date("n",strtotime($get_final_array[37]));
-                            $month_number14 = date("n",strtotime($get_final_array[40]));
-                            $month_number15 = date("n",strtotime($get_final_array[44]));
-                            $month_number16 = date("n",strtotime($get_final_array[47]));
-                            $month_number17 = date("n",strtotime($get_final_array[51]));
-                            $month_number18 = date("n",strtotime($get_final_array[54]));
-                            $month_number19 = date("n",strtotime($get_final_array[57]));
-                            $month_number20 = date("n",strtotime($get_final_array[61]));
-                            $month_number21 = date("n",strtotime($get_final_array[64]));
-                            $month_number22 = date("n",strtotime($get_final_array[67]));
-                            $month_number23 = date("n",strtotime($get_final_array[70]));
-                            $month_number24 = date("n",strtotime($get_final_array[73]));
-                            $month_number25 = date("n",strtotime($get_final_array[76]));
-
-
-                            if( $get_final_array[0] == $cellContent && $month_number1 == $this->currentMonth && $get_final_array[2] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[0].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></h2>
-                                            <p>'.$ev_summary_array[0].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[0].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            }elseif ( $get_final_array[3] == $cellContent && $month_number2 == $this->currentMonth && $get_final_array[5] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[1].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></h2>
-                                            <p>'.$ev_summary_array[1].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[1].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            }elseif ( $get_final_array[6] == $cellContent && $month_number3 == $this->currentMonth && $get_final_array[8] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                
-                                $content .= '<span class="info">
-                                    <a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a>
-                                    </span>';
-
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[2].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a></h2>
-                                            <p>'.$ev_summary_array[2].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[2].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[9] == $cellContent && $month_number4 == $this->currentMonth && $get_final_array[11] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[3].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></h2>
-                                            <p>'.$ev_summary_array[3].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[3].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[12] == $cellContent && $month_number5 == $this->currentMonth && $get_final_array[14] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[4].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></h2>
-                                            <p>'.$ev_summary_array[4].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[4].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[15] == $cellContent && $month_number6 == $this->currentMonth && $get_final_array[17] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[5].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></h2>
-                                            <p>'.$ev_summary_array[5].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[5].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[18] == $cellContent && $month_number7 == $this->currentMonth && $get_final_array[20] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[6].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></h2>
-                                            <p>'.$ev_summary_array[6].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[6].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[21] == $cellContent && $month_number8 == $this->currentMonth && $get_final_array[23] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[7].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></h2>
-                                            <p>'.$ev_summary_array[7].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[7].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[24] == $cellContent && $month_number9 == $this->currentMonth && $get_final_array[26] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[8].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></h2>
-                                            <p>'.$ev_summary_array[8].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[8].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[27] == $cellContent && $month_number10 == $this->currentMonth && $get_final_array[29] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[9].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></h2>
-                                            <p>'.$ev_summary_array[9].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[9].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[30] == $cellContent && $month_number11 == $this->currentMonth && $get_final_array[32] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[10].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></h2>
-                                            <p>'.$ev_summary_array[10].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[10].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[33] == $cellContent && $month_number12 == $this->currentMonth && $get_final_array[35] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[11].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></h2>
-                                            <p>'.$ev_summary_array[11].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[11].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>'; 
-                            } elseif ( $get_final_array[36] == $cellContent && $month_number13 == $this->currentMonth && $get_final_array[38] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[12].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></h2>
-                                            <p>'.$ev_summary_array[12].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[12].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>'; 
-                            } elseif ( $get_final_array[39] == $cellContent && $month_number14 == $this->currentMonth && $get_final_array[41] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[13].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></h2>
-                                            <p>'.$ev_summary_array[13].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[13].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[42] == $cellContent && $month_number15 == $this->currentMonth && $get_final_array[44] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[14].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></h2>
-                                            <p>'.$ev_summary_array[14].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[14].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[45] == $cellContent && $month_number16 == $this->currentMonth && $get_final_array[47] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[15].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></h2>
-                                            <p>'.$ev_summary_array[15].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[15].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[48] == $cellContent && $month_number17 == $this->currentMonth && $get_final_array[50] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[16].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></h2>
-                                            <p>'.$ev_summary_array[16].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[16].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[51] == $cellContent && $month_number18 == $this->currentMonth && $get_final_array[53] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[17].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></h2>
-                                            <p>'.$ev_summary_array[17].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[17].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>'; 
-                            } elseif ( $get_final_array[54] == $cellContent && $month_number19 == $this->currentMonth && $get_final_array[56] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[18].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></h2>
-                                            <p>'.$ev_summary_array[18].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[18].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[57] == $cellContent && $month_number20 == $this->currentMonth && $get_final_array[59] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[19].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></h2>
-                                            <p>'.$ev_summary_array[19].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[19].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[61] == $cellContent && $month_number21 == $this->currentMonth && $get_final_array[62] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[20].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></h2>
-                                            <p>'.$ev_summary_array[20].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[20].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[63] == $cellContent && $month_number22 == $this->currentMonth && $get_final_array[65] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[21].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></h2>
-                                            <p>'.$ev_summary_array[21].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[21].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[66] == $cellContent && $month_number23 == $this->currentMonth && $get_final_array[68] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[22].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></h2>
-                                            <p>'.$ev_summary_array[22].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[22].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>'; 
-                            } elseif ( $get_final_array[69] == $cellContent && $month_number24 == $this->currentMonth && $get_final_array[71] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[23].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></h2>
-                                            <p>'.$ev_summary_array[23].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[23].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';
-                            } elseif ( $get_final_array[72] == $cellContent && $month_number25 == $this->currentMonth && $get_final_array[74] == $this->currentYear){
-                                $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                $content .= '<span class="info"><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></span>';
-                                $content .= '<div class="event-intro">
-                                        <img src="'.$img_arr[24].'">
-                                        <div class="event-content">
-                                            <h2><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></h2>
-                                            <p>'.$ev_summary_array[24].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[24].'">'.__('Event Details', 'event-calender').'</a>
-                                        </div>
-                                    </div></li>';                                                                                                                         
-                            }else {
-                                $dateTime = new \DateTime();
-                                $compare_date = $dateTime->format('d');
-                                if ($compare_date <= $cellContent) {
-                                    $content .= '<li><span class="recent-date">'.$cellContent.'</span></li>';
-                                }else {
-                                    $content .= '<li><span class="past-date">'.$cellContent.'</span></li>';
-                                }
-                            }                                        
-
-                                if( $j == 7 ):
-                                    $content.='</ul>';
-                                    if( $week_inc !=6 ):
-                                        $content.='<ul class="flex date">';     
-                                    endif;
-                                endif;
-
-                            endfor;
-
-                            $week_inc++;
                         endfor;
- 
-                    $content.='</div>';
-                $content.='</div>';
-            $content .='</div>';
+
+                        $week_inc++;
+                    endfor;
+
+                $content.='</div>'; 
         $content .='</div>';
                  
         return $content;   
@@ -603,424 +598,419 @@ class Calendar_Shortcode {
 
         // $content = '';
         $content .='<div class="upcoming-events">'.
-                    $this->_createNavi().
-                    '<div class="row">
-                        <div class="col-md-12">                   
-                            <div class="calendar">';
-                            $content .='<ul class="flex day">'.$this->_createLabels().'</ul>';       
-                                $content.='<ul class="flex date">'; 
+            $this->_createNavi().
+            '<div class="calendar">';
+                $content .='<ul class="flex day">'.$this->_createLabels().'</ul>';       
+                        $content.='<ul class="flex date">'; 
 
-                                    $weeksInMonth = $this->_weeksInMonth($month,$year);
-                                    // Create weeks in a month
-                                    $week_inc = 1;
-                                    for( $i=0; $i<$weeksInMonth; $i++ ):
+                            $weeksInMonth = $this->_weeksInMonth($month,$year);
+                            // Create weeks in a month
+                            $week_inc = 1;
+                            for( $i=0; $i<$weeksInMonth; $i++ ):
 
-                                        //Create days in a week
-                                        for($j=1;$j<=7;$j++):
-                                        if($this->currentDay==0){
-                                            $firstDayOfTheWeek = date('N',strtotime($this->currentYear.'-'.$this->currentMonth.'-01'));  
-                                            if(intval($i*7+$j) == intval($firstDayOfTheWeek)){ 
-                                                $this->currentDay=1; 
-                                            }
+                                //Create days in a week
+                                for($j=1;$j<=7;$j++):
+                                if($this->currentDay==0){
+                                    $firstDayOfTheWeek = date('N',strtotime($this->currentYear.'-'.$this->currentMonth.'-01'));  
+                                    if(intval($i*7+$j) == intval($firstDayOfTheWeek)){ 
+                                        $this->currentDay=1; 
+                                    }
+                                }
+                                 
+                                if( ($this->currentDay!=0)&&($this->currentDay<=$this->daysInMonth) ){
+                                    $this->currentDate = date('Y-m-d',strtotime($this->currentYear.'-'.$this->currentMonth.'-'.($this->currentDay)));
+                                    $cellContent = $this->currentDay;
+                                    $cellContentMonth = $this->currentMonth;
+
+                                    $this->currentDay++;   
+                                }else{
+                                    $this->currentDate =null;
+                                    $cellContent=null;
+                                }
+
+                                $ev_array           = array();
+                                $img_arr            = array();
+                                $ev_title_array     = array();
+                                $ev_permalink_array = array();
+                                $ev_summary_array   = array();
+                                $events_args = 
+                                    array(
+                                        'post_type'     => 'event',
+                                        'post_status'   => 'publish'
+                                    );
+                                $events_query  = new \WP_Query( $events_args );
+                                if ( $events_query->have_posts() ) :  
+                                    while ( $events_query->have_posts() ) : $events_query->the_post(); 
+                                        // $events_date = get_post_meta(get_the_ID(), 'ecalendar_event_start_datetime', true);
+                                        
+                                        $edate = get_post_meta(get_the_ID(), 'event_start_date', true);
+                                        $etime = get_post_meta(get_the_ID(), 'event_start_time', true);
+
+                                        $events_date = $edate.' '.$etime;
+
+
+                                        $events_title                       = get_the_title();
+                                        // $highlighted_text                   = ecalendar_excerpt_max_charlength(180);
+
+                                        $get_image   = esc_url( wp_get_attachment_url( get_post_thumbnail_id(get_the_ID())));
+                                        $events_date = substr($events_date, 0, strrpos($events_date, ' '));
+
+                                        array_push( $ev_array, date("d F Y", strtotime($events_date)) );
+                                        array_push( $ev_title_array, $events_title );
+                                        array_push( $ev_permalink_array, esc_url(get_the_permalink()) );
+                                        array_push( $img_arr, $get_image );
+                                        array_push( $ev_summary_array, $highlighted_text );
+
+                                        if($events_query->post_count == ($events_query->current_post + 1)){
+                                            $newevarray = $ev_array;
                                         }
-                                         
-                                        if( ($this->currentDay!=0)&&($this->currentDay<=$this->daysInMonth) ){
-                                            $this->currentDate = date('Y-m-d',strtotime($this->currentYear.'-'.$this->currentMonth.'-'.($this->currentDay)));
-                                            $cellContent = $this->currentDay;
-                                            $cellContentMonth = $this->currentMonth;
+                                        $get_newevarray  = implode(" ",$newevarray);
+                                        $get_final_array = explode(" ", $get_newevarray);
+                                    
+                                    endwhile; 
+                                endif;
 
-                                            $this->currentDay++;   
-                                        }else{
-                                            $this->currentDate =null;
-                                            $cellContent=null;
-                                        }
+                                $month_number1  = date("n",strtotime($get_final_array[1]));
+                                $month_number2  = date("n",strtotime($get_final_array[4]));
+                                $month_number3  = date("n",strtotime($get_final_array[7]));
+                                $month_number4  = date("n",strtotime($get_final_array[10]));
+                                $month_number5  = date("n",strtotime($get_final_array[13]));
+                                $month_number6  = date("n",strtotime($get_final_array[16]));
+                                $month_number7  = date("n",strtotime($get_final_array[19]));
+                                $month_number8  = date("n",strtotime($get_final_array[22]));
+                                $month_number9  = date("n",strtotime($get_final_array[25]));
+                                $month_number10 = date("n",strtotime($get_final_array[28]));
+                                $month_number11 = date("n",strtotime($get_final_array[31]));
+                                $month_number12 = date("n",strtotime($get_final_array[34]));
+                                $month_number13 = date("n",strtotime($get_final_array[37]));
+                                $month_number14 = date("n",strtotime($get_final_array[40]));
+                                $month_number15 = date("n",strtotime($get_final_array[44]));
+                                $month_number16 = date("n",strtotime($get_final_array[47]));
+                                $month_number17 = date("n",strtotime($get_final_array[51]));
+                                $month_number18 = date("n",strtotime($get_final_array[54]));
+                                $month_number19 = date("n",strtotime($get_final_array[57]));
+                                $month_number20 = date("n",strtotime($get_final_array[61]));
+                                $month_number21 = date("n",strtotime($get_final_array[64]));
+                                $month_number22 = date("n",strtotime($get_final_array[67]));
+                                $month_number23 = date("n",strtotime($get_final_array[70]));
+                                $month_number24 = date("n",strtotime($get_final_array[73]));
+                                $month_number25 = date("n",strtotime($get_final_array[76]));
 
-                                        $ev_array           = array();
-                                        $img_arr            = array();
-                                        $ev_title_array     = array();
-                                        $ev_permalink_array = array();
-                                        $ev_summary_array   = array();
-                                        $events_args = 
-                                            array(
-                                                'post_type'     => 'event',
-                                                'post_status'   => 'publish'
-                                            );
-                                        $events_query  = new \WP_Query( $events_args );
-                                        if ( $events_query->have_posts() ) :  
-                                            while ( $events_query->have_posts() ) : $events_query->the_post(); 
-                                                // $events_date = get_post_meta(get_the_ID(), 'ecalendar_event_start_datetime', true);
-                                                
-                                                $edate = get_post_meta(get_the_ID(), 'event_start_date', true);
-                                                $etime = get_post_meta(get_the_ID(), 'event_start_time', true);
-
-                                                $events_date = $edate.' '.$etime;
-
-
-                                                $events_title                       = get_the_title();
-                                                // $highlighted_text                   = ecalendar_excerpt_max_charlength(180);
-
-                                                $get_image   = esc_url( wp_get_attachment_url( get_post_thumbnail_id(get_the_ID())));
-                                                $events_date = substr($events_date, 0, strrpos($events_date, ' '));
-
-                                                array_push( $ev_array, date("d F Y", strtotime($events_date)) );
-                                                array_push( $ev_title_array, $events_title );
-                                                array_push( $ev_permalink_array, esc_url(get_the_permalink()) );
-                                                array_push( $img_arr, $get_image );
-                                                array_push( $ev_summary_array, $highlighted_text );
-
-                                                if($events_query->post_count == ($events_query->current_post + 1)){
-                                                    $newevarray = $ev_array;
-                                                }
-                                                $get_newevarray  = implode(" ",$newevarray);
-                                                $get_final_array = explode(" ", $get_newevarray);
-                                            
-                                            endwhile; 
-                                        endif;
-
-                                        $month_number1  = date("n",strtotime($get_final_array[1]));
-                                        $month_number2  = date("n",strtotime($get_final_array[4]));
-                                        $month_number3  = date("n",strtotime($get_final_array[7]));
-                                        $month_number4  = date("n",strtotime($get_final_array[10]));
-                                        $month_number5  = date("n",strtotime($get_final_array[13]));
-                                        $month_number6  = date("n",strtotime($get_final_array[16]));
-                                        $month_number7  = date("n",strtotime($get_final_array[19]));
-                                        $month_number8  = date("n",strtotime($get_final_array[22]));
-                                        $month_number9  = date("n",strtotime($get_final_array[25]));
-                                        $month_number10 = date("n",strtotime($get_final_array[28]));
-                                        $month_number11 = date("n",strtotime($get_final_array[31]));
-                                        $month_number12 = date("n",strtotime($get_final_array[34]));
-                                        $month_number13 = date("n",strtotime($get_final_array[37]));
-                                        $month_number14 = date("n",strtotime($get_final_array[40]));
-                                        $month_number15 = date("n",strtotime($get_final_array[44]));
-                                        $month_number16 = date("n",strtotime($get_final_array[47]));
-                                        $month_number17 = date("n",strtotime($get_final_array[51]));
-                                        $month_number18 = date("n",strtotime($get_final_array[54]));
-                                        $month_number19 = date("n",strtotime($get_final_array[57]));
-                                        $month_number20 = date("n",strtotime($get_final_array[61]));
-                                        $month_number21 = date("n",strtotime($get_final_array[64]));
-                                        $month_number22 = date("n",strtotime($get_final_array[67]));
-                                        $month_number23 = date("n",strtotime($get_final_array[70]));
-                                        $month_number24 = date("n",strtotime($get_final_array[73]));
-                                        $month_number25 = date("n",strtotime($get_final_array[76]));
-
-                                        if( $get_final_array[0] == $cellContent && $month_number1 == $this->currentMonth && $get_final_array[2] == $this->currentYear){
+                                if( $get_final_array[0] == $cellContent && $month_number1 == $this->currentMonth && $get_final_array[2] == $this->currentYear){
 
 
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[0].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></h2>
-                                                        <p>'.$ev_summary_array[0].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[0].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[0].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></h2>
+                                                <p>'.$ev_summary_array[0].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[0].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
 
 
 
-                                        }elseif ( $get_final_array[3] == $cellContent && $month_number2 == $this->currentMonth && $get_final_array[5] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[1].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></h2>
-                                                        <p>'.$ev_summary_array[1].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[1].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>'; 
-                                        } elseif ( $get_final_array[6] == $cellContent && $month_number3 == $this->currentMonth && $get_final_array[8] == $this->currentYear){
+                                }elseif ( $get_final_array[3] == $cellContent && $month_number2 == $this->currentMonth && $get_final_array[5] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[1].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></h2>
+                                                <p>'.$ev_summary_array[1].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[1].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>'; 
+                                } elseif ( $get_final_array[6] == $cellContent && $month_number3 == $this->currentMonth && $get_final_array[8] == $this->currentYear){
 
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[2].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a></h2>
-                                                        <p>'.$ev_summary_array[2].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[2].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[2].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a></h2>
+                                                <p>'.$ev_summary_array[2].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[2].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
 
-                                        } elseif ( $get_final_array[9] == $cellContent && $month_number4 == $this->currentMonth && $get_final_array[11] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[3].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></h2>
-                                                        <p>'.$ev_summary_array[3].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[3].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
+                                } elseif ( $get_final_array[9] == $cellContent && $month_number4 == $this->currentMonth && $get_final_array[11] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[3].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></h2>
+                                                <p>'.$ev_summary_array[3].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[3].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
 
-                                        } elseif ( $get_final_array[12] == $cellContent && $month_number5 == $this->currentMonth && $get_final_array[14] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[4].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></h2>
-                                                        <p>'.$ev_summary_array[4].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[4].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';  
+                                } elseif ( $get_final_array[12] == $cellContent && $month_number5 == $this->currentMonth && $get_final_array[14] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[4].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></h2>
+                                                <p>'.$ev_summary_array[4].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[4].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';  
 
-                                        } elseif ( $get_final_array[15] == $cellContent && $month_number6 == $this->currentMonth && $get_final_array[17] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[5].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></h2>
-                                                        <p>'.$ev_summary_array[5].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[5].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
+                                } elseif ( $get_final_array[15] == $cellContent && $month_number6 == $this->currentMonth && $get_final_array[17] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[5].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></h2>
+                                                <p>'.$ev_summary_array[5].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[5].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
 
-                                        } elseif ( $get_final_array[18] == $cellContent && $month_number7 == $this->currentMonth && $get_final_array[20] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[6].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></h2>
-                                                        <p>'.$ev_summary_array[6].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[6].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
+                                } elseif ( $get_final_array[18] == $cellContent && $month_number7 == $this->currentMonth && $get_final_array[20] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[6].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></h2>
+                                                <p>'.$ev_summary_array[6].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[6].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
 
-                                        } elseif ( $get_final_array[21] == $cellContent && $month_number8 == $this->currentMonth && $get_final_array[23] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[7].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></h2>
-                                                        <p>'.$ev_summary_array[7].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[7].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
+                                } elseif ( $get_final_array[21] == $cellContent && $month_number8 == $this->currentMonth && $get_final_array[23] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[7].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></h2>
+                                                <p>'.$ev_summary_array[7].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[7].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
 
-                                        } elseif ( $get_final_array[24] == $cellContent && $month_number9 == $this->currentMonth && $get_final_array[26] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[8].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></h2>
-                                                        <p>'.$ev_summary_array[8].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[8].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
+                                } elseif ( $get_final_array[24] == $cellContent && $month_number9 == $this->currentMonth && $get_final_array[26] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[8].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></h2>
+                                                <p>'.$ev_summary_array[8].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[8].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
 
-                                        } elseif ( $get_final_array[27] == $cellContent && $month_number10 == $this->currentMonth && $get_final_array[29] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[9].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></h2>
-                                                        <p>'.$ev_summary_array[9].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[9].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';                      
+                                } elseif ( $get_final_array[27] == $cellContent && $month_number10 == $this->currentMonth && $get_final_array[29] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[9].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></h2>
+                                                <p>'.$ev_summary_array[9].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[9].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';                      
 
-                                        } elseif ( $get_final_array[30] == $cellContent && $month_number11 == $this->currentMonth && $get_final_array[32] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[10].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></h2>
-                                                        <p>'.$ev_summary_array[10].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[10].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';             
+                                } elseif ( $get_final_array[30] == $cellContent && $month_number11 == $this->currentMonth && $get_final_array[32] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[10].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></h2>
+                                                <p>'.$ev_summary_array[10].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[10].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';             
 
-                                        } elseif ( $get_final_array[33] == $cellContent && $month_number12 == $this->currentMonth && $get_final_array[35] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[11].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></h2>
-                                                        <p>'.$ev_summary_array[11].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[11].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';            
+                                } elseif ( $get_final_array[33] == $cellContent && $month_number12 == $this->currentMonth && $get_final_array[35] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[11].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></h2>
+                                                <p>'.$ev_summary_array[11].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[11].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';            
 
-                                        } elseif ( $get_final_array[36] == $cellContent && $month_number13 == $this->currentMonth && $get_final_array[38] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[12].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></h2>
-                                                        <p>'.$ev_summary_array[12].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[12].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[39] == $cellContent && $month_number14 == $this->currentMonth && $get_final_array[41] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[13].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></h2>
-                                                        <p>'.$ev_summary_array[13].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[13].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[42] == $cellContent && $month_number15 == $this->currentMonth && $get_final_array[44] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[14].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></h2>
-                                                        <p>'.$ev_summary_array[14].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[14].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[45] == $cellContent && $month_number16 == $this->currentMonth && $get_final_array[47] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[15].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></h2>
-                                                        <p>'.$ev_summary_array[15].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[15].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
+                                } elseif ( $get_final_array[36] == $cellContent && $month_number13 == $this->currentMonth && $get_final_array[38] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[12].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></h2>
+                                                <p>'.$ev_summary_array[12].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[12].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[39] == $cellContent && $month_number14 == $this->currentMonth && $get_final_array[41] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[13].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></h2>
+                                                <p>'.$ev_summary_array[13].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[13].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[42] == $cellContent && $month_number15 == $this->currentMonth && $get_final_array[44] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[14].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></h2>
+                                                <p>'.$ev_summary_array[14].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[14].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[45] == $cellContent && $month_number16 == $this->currentMonth && $get_final_array[47] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[15].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></h2>
+                                                <p>'.$ev_summary_array[15].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[15].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
 
-                                        } elseif ( $get_final_array[48] == $cellContent && $month_number17 == $this->currentMonth && $get_final_array[50] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[16].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></h2>
-                                                        <p>'.$ev_summary_array[16].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[16].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[51] == $cellContent && $month_number18 == $this->currentMonth && $get_final_array[53] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[17].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></h2>
-                                                        <p>'.$ev_summary_array[17].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[17].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>'; 
-                                        } elseif ( $get_final_array[54] == $cellContent && $month_number19 == $this->currentMonth && $get_final_array[56] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[18].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></h2>
-                                                        <p>'.$ev_summary_array[18].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[18].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[57] == $cellContent && $month_number20 == $this->currentMonth && $get_final_array[59] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[19].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></h2>
-                                                        <p>'.$ev_summary_array[19].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[19].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[61] == $cellContent && $month_number21 == $this->currentMonth && $get_final_array[62] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[20].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></h2>
-                                                        <p>'.$ev_summary_array[20].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[20].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[63] == $cellContent && $month_number22 == $this->currentMonth && $get_final_array[65] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[21].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></h2>
-                                                        <p>'.$ev_summary_array[21].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[21].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[66] == $cellContent && $month_number23 == $this->currentMonth && $get_final_array[68] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[22].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></h2>
-                                                        <p>'.$ev_summary_array[22].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[22].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[69] == $cellContent && $month_number24 == $this->currentMonth && $get_final_array[71] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[23].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></h2>
-                                                        <p>'.$ev_summary_array[23].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[23].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';
-                                        } elseif ( $get_final_array[72] == $cellContent && $month_number25 == $this->currentMonth && $get_final_array[74] == $this->currentYear){
-                                            $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
-                                            $content .= '<span class="info"><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></span>';
-                                            $content .= '<div class="event-intro">
-                                                    <img src="'.$img_arr[24].'">
-                                                    <div class="event-content">
-                                                        <h2><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></h2>
-                                                        <p>'.$ev_summary_array[24].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[24].'">'.__('Event Details', 'event-calender').'</a>
-                                                    </div>
-                                                </div></li>';                                                                                                                           
-                                        }else {
-                                            
-                                            $dateTime = new \DateTime();
-                                            $today_date = $dateTime->format('Y-m-d');
-                                            if ($this->currentDate >= $today_date) {
-                                                $content .= '<li><span class="recent-date">'.$cellContent.'</span></li>';
-                                            }elseif ($this->currentDate <= $today_date) {
-                                                $content .= '<li><span>'.$cellContent.'</span></li>';
-                                            } 
+                                } elseif ( $get_final_array[48] == $cellContent && $month_number17 == $this->currentMonth && $get_final_array[50] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[16].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></h2>
+                                                <p>'.$ev_summary_array[16].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[16].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[51] == $cellContent && $month_number18 == $this->currentMonth && $get_final_array[53] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[17].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></h2>
+                                                <p>'.$ev_summary_array[17].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[17].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>'; 
+                                } elseif ( $get_final_array[54] == $cellContent && $month_number19 == $this->currentMonth && $get_final_array[56] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[18].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></h2>
+                                                <p>'.$ev_summary_array[18].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[18].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[57] == $cellContent && $month_number20 == $this->currentMonth && $get_final_array[59] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[19].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></h2>
+                                                <p>'.$ev_summary_array[19].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[19].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[61] == $cellContent && $month_number21 == $this->currentMonth && $get_final_array[62] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[20].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></h2>
+                                                <p>'.$ev_summary_array[20].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[20].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[63] == $cellContent && $month_number22 == $this->currentMonth && $get_final_array[65] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[21].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></h2>
+                                                <p>'.$ev_summary_array[21].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[21].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[66] == $cellContent && $month_number23 == $this->currentMonth && $get_final_array[68] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[22].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></h2>
+                                                <p>'.$ev_summary_array[22].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[22].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[69] == $cellContent && $month_number24 == $this->currentMonth && $get_final_array[71] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[23].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></h2>
+                                                <p>'.$ev_summary_array[23].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[23].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';
+                                } elseif ( $get_final_array[72] == $cellContent && $month_number25 == $this->currentMonth && $get_final_array[74] == $this->currentYear){
+                                    $content .= '<li class="event-date"><span class="date-pos">'.$cellContent.'</span>';
+                                    $content .= '<span class="info"><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></span>';
+                                    $content .= '<div class="event-intro">
+                                            <img src="'.$img_arr[24].'">
+                                            <div class="event-content">
+                                                <h2><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></h2>
+                                                <p>'.$ev_summary_array[24].'</p>
+                                                <a class="btn" href="'.$ev_permalink_array[24].'">'.__('Event Details', 'event-calender').'</a>
+                                            </div>
+                                        </div></li>';                                                                                                                           
+                                }else {
+                                    
+                                    $dateTime = new \DateTime();
+                                    $today_date = $dateTime->format('Y-m-d');
+                                    if ($this->currentDate >= $today_date) {
+                                        $content .= '<li><span class="recent-date">'.$cellContent.'</span></li>';
+                                    }elseif ($this->currentDate <= $today_date) {
+                                        $content .= '<li><span>'.$cellContent.'</span></li>';
+                                    } 
 
-                                        }
+                                }
 
-                                        if( $j == 7 ):
-                                            $content.='</ul>';
-                                            if( $week_inc !=6 ):
-                                                $content.='<ul class="flex date">';     
-                                            endif;
-                                        endif;
+                                if( $j == 7 ):
+                                    $content.='</ul>';
+                                    if( $week_inc !=6 ):
+                                        $content.='<ul class="flex date">';     
+                                    endif;
+                                endif;
 
-                                    endfor;
+                            endfor;
 
-                                    $week_inc++;
-                                endfor;    
-
-                    $content.='</div>';
-                $content.='</div>';
+                            $week_inc++;
+                        endfor;    
             $content.='</div>';
         $content.='</div>';
                  
