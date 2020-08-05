@@ -1,4 +1,4 @@
-=== event-calender ===
+=== digital-events-calender ===
 
 Contributors: rejuancse
 Tags: Wordpress Event Calender, Event Calender.
