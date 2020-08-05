@@ -1,0 +1,229 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2020-08-02 22:07+0600\n"
+"PO-Revision-Date: 2020-08-02 22:07+0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;esc_html;esc_html__;esc_attr\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/admin/class-calendar-type-admin.php:57
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/class-digital-event-calendar-settings.php:92
+msgid "Calender Style"
+msgstr ""
+
+#: includes/admin/class-digital-event-calendar-settings.php:97
+msgid "Major Color"
+msgstr ""
+
+#: includes/admin/class-digital-event-calendar-settings.php:105
+#: includes/admin/class-digital-event-calendar-settings.php:111
+msgid "Shortcode"
+msgstr ""
+
+#: includes/admin/class-digital-event-calendar-settings.php:110
+msgid "[event_calender]"
+msgstr ""
+
+#: includes/admin/class-digital-event-calendar-settings.php:161
+msgid "Settings successfully saved"
+msgstr ""
+
+#: includes/admin/class-digital-event-calendar-settings.php:275
+msgid "--no page--"
+msgstr ""
+
+#: includes/class-event-post-types.php:33
+msgid "Events Calendar"
+msgstr ""
+
+#: includes/class-event-post-types.php:34
+msgid "Parent Event:"
+msgstr ""
+
+#: includes/class-event-post-types.php:35
+msgid "All Events"
+msgstr ""
+
+#: includes/class-event-post-types.php:36
+msgid "View Event"
+msgstr ""
+
+#: includes/class-event-post-types.php:37
+msgid "Add New Event"
+msgstr ""
+
+#: includes/class-event-post-types.php:38
+msgid "New Event"
+msgstr ""
+
+#: includes/class-event-post-types.php:39
+msgid "Edit Event"
+msgstr ""
+
+#: includes/class-event-post-types.php:40
+msgid "Update Event"
+msgstr ""
+
+#: includes/class-event-post-types.php:41
+msgid "Search Event"
+msgstr ""
+
+#: includes/class-event-post-types.php:42
+msgid "No article found"
+msgstr ""
+
+#: includes/class-event-post-types.php:43
+msgid "No article found in Trash"
+msgstr ""
+
+#: includes/class-event-post-types.php:66
+msgid "Search Categories"
+msgstr ""
+
+#: includes/class-event-post-types.php:67
+msgid "Popular Categories"
+msgstr ""
+
+#: includes/class-event-post-types.php:68
+msgid "All Categories"
+msgstr ""
+
+#: includes/class-event-post-types.php:71
+msgid "Edit Category"
+msgstr ""
+
+#: includes/class-event-post-types.php:72
+msgid "Update Category"
+msgstr ""
+
+#: includes/class-event-post-types.php:73
+msgid "Add New Category"
+msgstr ""
+
+#: includes/class-event-post-types.php:74
+msgid "New Category Name"
+msgstr ""
+
+#: includes/class-event-post-types.php:75
+msgid "Separate categories with commas"
+msgstr ""
+
+#: includes/class-event-post-types.php:76
+msgid "Add or remove categories"
+msgstr ""
+
+#: includes/class-event-post-types.php:77
+msgid "Choose from the most used categories"
+msgstr ""
+
+#: includes/class-event-post-types.php:78
+msgid "No categories found."
+msgstr ""
+
+#: includes/class-event-post-types.php:79
+msgid "Event Categories"
+msgstr ""
+
+#: includes/class-event-post-types.php:99
+#, php-format
+msgid "Event updated. <a href=\"%s\">View Event</a>"
+msgstr ""
+
+#: includes/class-event-post-types.php:100
+msgid "Custom field updated."
+msgstr ""
+
+#: includes/class-event-post-types.php:101
+msgid "Custom field deleted."
+msgstr ""
+
+#: includes/class-event-post-types.php:102
+msgid "Event updated."
+msgstr ""
+
+#: includes/class-event-post-types.php:103
+#, php-format
+msgid "Event restored to revision from %s"
+msgstr ""
+
+#: includes/class-event-post-types.php:104
+#, php-format
+msgid "Event published. <a href=\"%s\">View Event</a>"
+msgstr ""
+
+#: includes/class-event-post-types.php:105
+msgid "Event saved."
+msgstr ""
+
+#: includes/class-event-post-types.php:106
+#, php-format
+msgid "Event submitted. <a target=\"_blank\" href=\"%s\">Preview Event</a>"
+msgstr ""
+
+#: includes/class-event-post-types.php:107
+#, php-format
+msgid ""
+"Event scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
+"\">Preview Event</a>"
+msgstr ""
+
+#: includes/class-event-post-types.php:107
+msgid "M j, Y @ G:i"
+msgstr ""
+
+#: includes/class-event-post-types.php:108
+#, php-format
+msgid "Event draft updated. <a target=\"_blank\" href=\"%s\">Preview Event</a>"
+msgstr ""
+
+#: includes/metabox/Events.php:18
+msgid "Events Info"
+msgstr ""
+
+#: includes/metabox/events-metabox.php:2
+msgid "Event Start Date: "
+msgstr ""
+
+#: includes/metabox/events-metabox.php:8
+msgid "Event End Date: "
+msgstr ""
+
+#: includes/metabox/events-metabox.php:14
+msgid "Event Organizer: "
+msgstr ""
+
+#: includes/metabox/events-metabox.php:19
+msgid "Event Location: "
+msgstr ""
+
+#: lib/calendar.php:157 lib/calendar.php:168 lib/calendar.php:183
+#: lib/calendar.php:194 lib/calendar.php:205 lib/calendar.php:216
+#: lib/calendar.php:227 lib/calendar.php:238 lib/calendar.php:249
+#: lib/calendar.php:260 lib/calendar.php:271 lib/calendar.php:282
+#: lib/calendar.php:293 lib/calendar.php:304 lib/calendar.php:315
+#: lib/calendar.php:326 lib/calendar.php:337 lib/calendar.php:348
+#: lib/calendar.php:359 lib/calendar.php:370 lib/calendar.php:381
+#: lib/calendar.php:392 lib/calendar.php:403 lib/calendar.php:414
+#: lib/calendar.php:425 lib/calendar.php:710 lib/calendar.php:724
+#: lib/calendar.php:736 lib/calendar.php:748 lib/calendar.php:760
+#: lib/calendar.php:772 lib/calendar.php:784 lib/calendar.php:796
+#: lib/calendar.php:808 lib/calendar.php:820 lib/calendar.php:832
+#: lib/calendar.php:844 lib/calendar.php:856 lib/calendar.php:867
+#: lib/calendar.php:878 lib/calendar.php:889 lib/calendar.php:901
+#: lib/calendar.php:912 lib/calendar.php:923 lib/calendar.php:934
+#: lib/calendar.php:945 lib/calendar.php:956 lib/calendar.php:967
+#: lib/calendar.php:978 lib/calendar.php:989
+msgid "Event Details"
+msgstr ""

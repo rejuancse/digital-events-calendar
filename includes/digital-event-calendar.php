@@ -1,5 +1,4 @@
 <?php
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -43,6 +42,8 @@ class Digital_Event_Calendar {
 
 	    # JS
 	    wp_enqueue_script( 'jquery' );
+	    wp_enqueue_script('event-main', DEC_URI.'assets/js/main.js',array(),false,true);
+	    # For Ajax URL
 	    wp_enqueue_script( 'event-main' );
 	    wp_localize_script( 'event-main', 'eajax_objects', array( 
 	    		'ajaxurl' 			=> admin_url( 'admin-ajax.php' ),

@@ -28,9 +28,9 @@ class DEC_Post_Types {
 	public function register_post_types() {
 
 		$labels = array(
-			'name'                	=> _x( 'Events', 'Events', 'event-calender' ),
-			'singular_name'       	=> _x( 'Event', 'Event', 'event-calender' ),
-			'menu_name'           	=> __( 'Events', 'event-calender' ),
+			'name'                	=> _x( 'Events Calendar', 'Events Calendar', 'event-calender' ),
+			'singular_name'       	=> _x( 'Event Calendar', 'Event Calendar', 'event-calender' ),
+			'menu_name'           	=> __( 'Events Calendar', 'event-calender' ),
 			'parent_item_colon'   	=> __( 'Parent Event:', 'event-calender' ),
 			'all_items'           	=> __( 'All Events', 'event-calender' ),
 			'view_item'           	=> __( 'View Event', 'event-calender' ),
@@ -43,7 +43,7 @@ class DEC_Post_Types {
 			'not_found_in_trash'  	=> __( 'No article found in Trash', 'event-calender' )
 		);
 		$args = array(
-			'labels'                    => $labels,
+			'labels' 				=> $labels,
 			'public'             	=> true,
 			'publicly_queryable' 	=> true,
 			'show_in_menu'       	=> true,

@@ -1,7 +1,6 @@
 <?php
 namespace DEC\lib;
 
-error_reporting(0);
 class Calendar_Shortcode { 
 
     /**
@@ -12,7 +11,7 @@ class Calendar_Shortcode {
     }
      
     /**------------------ PROPERTY *------------------*/  
-    private $dayLabels      = array("Mon","Tue","Wed","Thu","Fri","Sat","Sun");
+    private $dayLabels      = array( "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" );
     private $currentYear    = 0; 
     private $currentMonth   = 0;
     private $currentDay     = 0;
@@ -27,17 +26,18 @@ class Calendar_Shortcode {
     */
     public function show() {
 
-        $year  == null;
-        $month == null;
+        $year  = '';
+        $month = '';
+        $content = $newevarray = '';
          
-        if(null==$year&&isset($_GET['year'])){
-            $year = $_GET['year'];
-        }else if(null==$year){
+        if(isset($_GET['year'])){
+            $year = (int) sanitize_text_field($_GET['year']);
+        }else if(''==$year){
             $year = date("Y",time());  
         }           
-        if(null==$month&&isset($_GET['month'])){
-            $month = $_GET['month'];
-        }else if(null==$month){
+        if(''==$month && isset($_GET['month'])){
+            $month = sanitize_text_field($_GET['month']);
+        }else if(''==$month){
             $month = date("m",time());
         }                  
          
@@ -91,6 +91,7 @@ class Calendar_Shortcode {
                             if ( $events_query->have_posts() ) :  
                                 while ( $events_query->have_posts() ) : $events_query->the_post(); 
 
+                                    // $newevarray = '';
                                     $desc = DEC()->limit_word_text(strip_tags(get_the_content()), 130);
                                     
                                     $edate = get_post_meta(get_the_ID(), 'event_start_date', true);
@@ -112,12 +113,17 @@ class Calendar_Shortcode {
                                         $newevarray = $ev_array; 
                                     }
                                     
-                                    $get_newevarray  = implode(' ', $newevarray);
-                                    $get_final_array = explode(' ', $get_newevarray);
+                                    if (!empty($newevarray)) {
+                                        $get_newevarray  = implode(' ', $newevarray);
+                                    }
+
+                                    if (!empty($get_newevarray)) {
+                                        $get_final_array = explode(' ', $get_newevarray);
+                                        $get_final_array = preg_match('/value="(\d*)"/', $get_final_array[0], $get_newevarray);
+                                    }
                                 
                                 endwhile; 
                             endif;
-
 
                             $month_number1  = date("n",strtotime($get_final_array[1]));
                             $month_number2  = date("n",strtotime($get_final_array[4]));
@@ -154,7 +160,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></h2>
                                             <p>'.$ev_summary_array[0].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[0].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[0].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             }elseif ( $get_final_array[3] == $cellContent && $month_number2 == $this->currentMonth && $get_final_array[5] == $this->currentYear){
@@ -165,7 +171,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></h2>
                                             <p>'.$ev_summary_array[1].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[1].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[1].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             }elseif ( $get_final_array[6] == $cellContent && $month_number3 == $this->currentMonth && $get_final_array[8] == $this->currentYear){
@@ -180,7 +186,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a></h2>
                                             <p>'.$ev_summary_array[2].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[2].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[2].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[9] == $cellContent && $month_number4 == $this->currentMonth && $get_final_array[11] == $this->currentYear){
@@ -191,7 +197,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></h2>
                                             <p>'.$ev_summary_array[3].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[3].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[3].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[12] == $cellContent && $month_number5 == $this->currentMonth && $get_final_array[14] == $this->currentYear){
@@ -202,7 +208,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></h2>
                                             <p>'.$ev_summary_array[4].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[4].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[4].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[15] == $cellContent && $month_number6 == $this->currentMonth && $get_final_array[17] == $this->currentYear){
@@ -213,7 +219,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></h2>
                                             <p>'.$ev_summary_array[5].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[5].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[5].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[18] == $cellContent && $month_number7 == $this->currentMonth && $get_final_array[20] == $this->currentYear){
@@ -224,7 +230,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></h2>
                                             <p>'.$ev_summary_array[6].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[6].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[6].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[21] == $cellContent && $month_number8 == $this->currentMonth && $get_final_array[23] == $this->currentYear){
@@ -235,7 +241,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></h2>
                                             <p>'.$ev_summary_array[7].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[7].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[7].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[24] == $cellContent && $month_number9 == $this->currentMonth && $get_final_array[26] == $this->currentYear){
@@ -246,7 +252,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></h2>
                                             <p>'.$ev_summary_array[8].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[8].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[8].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[27] == $cellContent && $month_number10 == $this->currentMonth && $get_final_array[29] == $this->currentYear){
@@ -257,7 +263,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></h2>
                                             <p>'.$ev_summary_array[9].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[9].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[9].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[30] == $cellContent && $month_number11 == $this->currentMonth && $get_final_array[32] == $this->currentYear){
@@ -268,7 +274,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></h2>
                                             <p>'.$ev_summary_array[10].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[10].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[10].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[33] == $cellContent && $month_number12 == $this->currentMonth && $get_final_array[35] == $this->currentYear){
@@ -279,7 +285,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></h2>
                                             <p>'.$ev_summary_array[11].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[11].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[11].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>'; 
                             } elseif ( $get_final_array[36] == $cellContent && $month_number13 == $this->currentMonth && $get_final_array[38] == $this->currentYear){
@@ -290,7 +296,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></h2>
                                             <p>'.$ev_summary_array[12].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[12].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[12].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>'; 
                             } elseif ( $get_final_array[39] == $cellContent && $month_number14 == $this->currentMonth && $get_final_array[41] == $this->currentYear){
@@ -301,7 +307,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></h2>
                                             <p>'.$ev_summary_array[13].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[13].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[13].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[42] == $cellContent && $month_number15 == $this->currentMonth && $get_final_array[44] == $this->currentYear){
@@ -312,7 +318,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></h2>
                                             <p>'.$ev_summary_array[14].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[14].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[14].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[45] == $cellContent && $month_number16 == $this->currentMonth && $get_final_array[47] == $this->currentYear){
@@ -323,7 +329,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></h2>
                                             <p>'.$ev_summary_array[15].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[15].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[15].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[48] == $cellContent && $month_number17 == $this->currentMonth && $get_final_array[50] == $this->currentYear){
@@ -334,7 +340,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></h2>
                                             <p>'.$ev_summary_array[16].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[16].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[16].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[51] == $cellContent && $month_number18 == $this->currentMonth && $get_final_array[53] == $this->currentYear){
@@ -345,7 +351,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></h2>
                                             <p>'.$ev_summary_array[17].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[17].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[17].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>'; 
                             } elseif ( $get_final_array[54] == $cellContent && $month_number19 == $this->currentMonth && $get_final_array[56] == $this->currentYear){
@@ -356,7 +362,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></h2>
                                             <p>'.$ev_summary_array[18].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[18].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[18].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[57] == $cellContent && $month_number20 == $this->currentMonth && $get_final_array[59] == $this->currentYear){
@@ -367,7 +373,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></h2>
                                             <p>'.$ev_summary_array[19].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[19].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[19].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[61] == $cellContent && $month_number21 == $this->currentMonth && $get_final_array[62] == $this->currentYear){
@@ -378,7 +384,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></h2>
                                             <p>'.$ev_summary_array[20].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[20].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[20].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[63] == $cellContent && $month_number22 == $this->currentMonth && $get_final_array[65] == $this->currentYear){
@@ -389,7 +395,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></h2>
                                             <p>'.$ev_summary_array[21].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[21].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[21].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[66] == $cellContent && $month_number23 == $this->currentMonth && $get_final_array[68] == $this->currentYear){
@@ -400,7 +406,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></h2>
                                             <p>'.$ev_summary_array[22].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[22].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[22].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>'; 
                             } elseif ( $get_final_array[69] == $cellContent && $month_number24 == $this->currentMonth && $get_final_array[71] == $this->currentYear){
@@ -411,7 +417,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></h2>
                                             <p>'.$ev_summary_array[23].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[23].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[23].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';
                             } elseif ( $get_final_array[72] == $cellContent && $month_number25 == $this->currentMonth && $get_final_array[74] == $this->currentYear){
@@ -422,7 +428,7 @@ class Calendar_Shortcode {
                                         <div class="event-content">
                                             <h2><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></h2>
                                             <p>'.$ev_summary_array[24].'</p>
-                                            <a class="btn" href="'.$ev_permalink_array[24].'">'.__('Event Details', 'ecalendar').'</a>
+                                            <a class="btn" href="'.$ev_permalink_array[24].'">'.__('Event Details', 'event-calender').'</a>
                                         </div>
                                     </div></li>';                                                                                                                         
                             }else {
@@ -707,7 +713,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[0].'">'.$ev_title_array[0].'</a></h2>
                                                         <p>'.$ev_summary_array[0].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[0].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[0].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
 
@@ -721,7 +727,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[1].'">'.$ev_title_array[1].'</a></h2>
                                                         <p>'.$ev_summary_array[1].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[1].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[1].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>'; 
                                         } elseif ( $get_final_array[6] == $cellContent && $month_number3 == $this->currentMonth && $get_final_array[8] == $this->currentYear){
@@ -733,7 +739,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[2].'">'.$ev_title_array[2].'</a></h2>
                                                         <p>'.$ev_summary_array[2].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[2].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[2].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
 
@@ -745,7 +751,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[3].'">'.$ev_title_array[3].'</a></h2>
                                                         <p>'.$ev_summary_array[3].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[3].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[3].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
 
@@ -757,7 +763,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[4].'">'.$ev_title_array[4].'</a></h2>
                                                         <p>'.$ev_summary_array[4].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[4].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[4].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';  
 
@@ -769,7 +775,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[5].'">'.$ev_title_array[5].'</a></h2>
                                                         <p>'.$ev_summary_array[5].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[5].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[5].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
 
@@ -781,7 +787,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[6].'">'.$ev_title_array[6].'</a></h2>
                                                         <p>'.$ev_summary_array[6].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[6].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[6].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
 
@@ -793,7 +799,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[7].'">'.$ev_title_array[7].'</a></h2>
                                                         <p>'.$ev_summary_array[7].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[7].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[7].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
 
@@ -805,7 +811,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[8].'">'.$ev_title_array[8].'</a></h2>
                                                         <p>'.$ev_summary_array[8].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[8].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[8].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
 
@@ -817,7 +823,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[9].'">'.$ev_title_array[9].'</a></h2>
                                                         <p>'.$ev_summary_array[9].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[9].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[9].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';                      
 
@@ -829,7 +835,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[10].'">'.$ev_title_array[10].'</a></h2>
                                                         <p>'.$ev_summary_array[10].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[10].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[10].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';             
 
@@ -841,7 +847,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[11].'">'.$ev_title_array[11].'</a></h2>
                                                         <p>'.$ev_summary_array[11].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[11].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[11].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';            
 
@@ -853,7 +859,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[12].'">'.$ev_title_array[12].'</a></h2>
                                                         <p>'.$ev_summary_array[12].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[12].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[12].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[39] == $cellContent && $month_number14 == $this->currentMonth && $get_final_array[41] == $this->currentYear){
@@ -864,7 +870,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[13].'">'.$ev_title_array[13].'</a></h2>
                                                         <p>'.$ev_summary_array[13].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[13].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[13].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[42] == $cellContent && $month_number15 == $this->currentMonth && $get_final_array[44] == $this->currentYear){
@@ -875,7 +881,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[14].'">'.$ev_title_array[14].'</a></h2>
                                                         <p>'.$ev_summary_array[14].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[14].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[14].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[45] == $cellContent && $month_number16 == $this->currentMonth && $get_final_array[47] == $this->currentYear){
@@ -886,7 +892,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[15].'">'.$ev_title_array[15].'</a></h2>
                                                         <p>'.$ev_summary_array[15].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[15].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[15].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
 
@@ -898,7 +904,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[16].'">'.$ev_title_array[16].'</a></h2>
                                                         <p>'.$ev_summary_array[16].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[16].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[16].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[51] == $cellContent && $month_number18 == $this->currentMonth && $get_final_array[53] == $this->currentYear){
@@ -909,7 +915,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[17].'">'.$ev_title_array[17].'</a></h2>
                                                         <p>'.$ev_summary_array[17].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[17].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[17].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>'; 
                                         } elseif ( $get_final_array[54] == $cellContent && $month_number19 == $this->currentMonth && $get_final_array[56] == $this->currentYear){
@@ -920,7 +926,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[18].'">'.$ev_title_array[18].'</a></h2>
                                                         <p>'.$ev_summary_array[18].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[18].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[18].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[57] == $cellContent && $month_number20 == $this->currentMonth && $get_final_array[59] == $this->currentYear){
@@ -931,7 +937,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[19].'">'.$ev_title_array[19].'</a></h2>
                                                         <p>'.$ev_summary_array[19].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[19].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[19].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[61] == $cellContent && $month_number21 == $this->currentMonth && $get_final_array[62] == $this->currentYear){
@@ -942,7 +948,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[20].'">'.$ev_title_array[20].'</a></h2>
                                                         <p>'.$ev_summary_array[20].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[20].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[20].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[63] == $cellContent && $month_number22 == $this->currentMonth && $get_final_array[65] == $this->currentYear){
@@ -953,7 +959,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[21].'">'.$ev_title_array[21].'</a></h2>
                                                         <p>'.$ev_summary_array[21].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[21].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[21].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[66] == $cellContent && $month_number23 == $this->currentMonth && $get_final_array[68] == $this->currentYear){
@@ -964,7 +970,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[22].'">'.$ev_title_array[22].'</a></h2>
                                                         <p>'.$ev_summary_array[22].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[22].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[22].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[69] == $cellContent && $month_number24 == $this->currentMonth && $get_final_array[71] == $this->currentYear){
@@ -975,7 +981,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[23].'">'.$ev_title_array[23].'</a></h2>
                                                         <p>'.$ev_summary_array[23].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[23].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[23].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';
                                         } elseif ( $get_final_array[72] == $cellContent && $month_number25 == $this->currentMonth && $get_final_array[74] == $this->currentYear){
@@ -986,7 +992,7 @@ class Calendar_Shortcode {
                                                     <div class="event-content">
                                                         <h2><a href="'.$ev_permalink_array[24].'">'.$ev_title_array[24].'</a></h2>
                                                         <p>'.$ev_summary_array[24].'</p>
-                                                        <a class="btn" href="'.$ev_permalink_array[24].'">'.__('Event Details', 'ecalendar').'</a>
+                                                        <a class="btn" href="'.$ev_permalink_array[24].'">'.__('Event Details', 'event-calender').'</a>
                                                     </div>
                                                 </div></li>';                                                                                                                           
                                         }else {
@@ -1021,51 +1027,3 @@ class Calendar_Shortcode {
         return $content;   
     } # Next Month Event
 } ?>
-
-
-<script type="text/javascript">
-    /* -------------------------------------  
-    1. Calendar Next Month
-    ---------------------------------------- */
-    function getNextMonth(){
-        jQuery(".upcoming-events").addClass("loading-calendar");
-        jQuery('.calendar').addClass('spinner');
-        var nextmonth = jQuery("#nextmonth").attr("month");  
-        var nextyear  = jQuery("#nextmonth").attr("year");
-        jQuery.ajax({
-            type: 'POST',
-            url: eajax_objects.ajaxurl,
-            data: { "action": "edisplaynextmonth", "nextmonth":nextmonth, "nextyear":nextyear, _nonce : eajax_objects.ajax_nonce },
-            success: function(data){
-               jQuery(".upcoming-events").removeClass("loading-calendar");
-               jQuery('.calendar').removeClass('spinner');
-               jQuery("#calendar_area").html(data);
-            }
-        }); 
-    }
-
-    /* -------------------------------------  
-    2. Calendar Pre Month
-    ---------------------------------------- */
-    function getPrevMonth(){
-        jQuery(".upcoming-events").addClass("loading-calendar");
-        jQuery('.calendar').addClass('spinner');
-        var prevmonth = jQuery("#premonth").attr("month");  
-        var prevyear  = jQuery("#premonth").attr("year"); 
-        jQuery.ajax({
-            type: 'POST',
-            url: eajax_objects.ajaxurl,
-            data: { 
-                "action": "edisplaynextmonth",
-                "nextmonth":prevmonth,
-                "nextyear":prevyear, 
-                _nonce : eajax_objects.ajax_nonce 
-            },
-            success: function(data){
-                jQuery(".upcoming-events").removeClass("loading-calendar");
-                jQuery('.calendar').removeClass('spinner');
-                jQuery("#calendar_area").html(data);
-            }
-        }); 
-    }
-</script>

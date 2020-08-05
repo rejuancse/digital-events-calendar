@@ -34,10 +34,8 @@ final class Events_Calender {
 	# Include Shortcode
 	public function include_shortcode() {
 		include_once DEC_DIR_PATH.'shortcode/Calender.php';
-		include_once DEC_DIR_PATH.'shortcode/Events-List.php';
 
 		$dec_calender 	= new \DEC\shortcode\Calendar();
-		$events_listing = new \DEC\shortcode\Events_Listing();
 
 		# require file for compatibility
 		require_once DEC_DIR_PATH.'includes/compatibility/Shortcodes.php';
@@ -49,8 +47,8 @@ final class Events_Calender {
 	        check_ajax_referer( 'event-calendar-nonce', '_nonce' );
 	        require_once DEC_DIR_PATH . 'lib/calendar.php';
 	        $calendar_shortcode = new \DEC\lib\Calendar_Shortcode();
-	        $nextmonth  = $_POST['nextmonth'];
-	        $nextyear   = $_POST['nextyear'];
+	        $nextmonth  = sanitize_text_field($_POST['nextmonth']);
+	        $nextyear   = (int) sanitize_text_field($_POST['nextyear']);
 
     		echo $calendar_shortcode->showCalender( $nextmonth, $nextyear ); 
 	    } 

@@ -3232,13 +3232,13 @@ nav.ecalendar-pagination {
 }
 
 .upcoming-events .btn.prev {
-    /*background-image: url(arrow_left.png) !important;*/
+    background-image: url(arrow_left.png) !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
 
 .upcoming-events .btn.next {
-    /*background-image: url(arrow_right.png) !important;*/
+    background-image: url(arrow_right.png) !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
