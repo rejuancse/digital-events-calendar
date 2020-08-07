@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'DEC_FILE', __FILE__ );
-define( 'DEC_VERSION', '1.0.0' );
+define( 'DEC_VERSION', '1.0.1' );
 define( 'DEC_URI', plugin_dir_url( DEC_FILE ) ); 
 define( 'DEC_DIR_PATH', plugin_dir_path( DEC_FILE  ));
 define( 'DEC_PLUGIN_DIR', untrailingslashit( plugin_dir_path( DEC_FILE ) ) );
