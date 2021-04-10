@@ -108,11 +108,18 @@ class Digital_Event_Calendar_Settings {
 							'name'  	=> 'shortcode_list_page_id',
 							// 'std'   	=> '[event_calender]',
 							'desc'      => __( '[event_calender]', 'event-calender' ),
-							'label' 	=> __( 'Shortcode', 'event-calender' ),
+							'label' 	=> __( 'Event Calendar', 'event-calender' ),
+							'type'  	=> '',
+						],
+						[
+							'name'  	=> 'shortcode_list_page_id',
+							'desc'      => __( '[events_list] or [events_list number="9" column="4"]', 'event-calender' ),
+							'label' 	=> __( 'Event Listing', 'event-calender' ),
 							'type'  	=> '',
 						],
 					],
 				],
+				
 			]
 		); 	
 

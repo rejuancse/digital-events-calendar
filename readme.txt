@@ -1,9 +1,9 @@
 === Digital Events Calendar ===
 
 Contributors: rejuancse
-Tags: WordPress Event Calendar, Event, Events, Calendar, Event Calendar, Calender
-Requires at least: 4.5
-Tested up to: 5.4
+Tags: WordPress Event Calendar, Event, Events, Calendar, Event Calendar, Calender, Event Calender
+Requires at least: 5.0
+Tested up to: 5.7
 Requires PHP: 5.4.0
 Stable tag:  1.0.3
 License: GPLv2 or later
@@ -19,6 +19,7 @@ If you want to build event calender in your wordpress theme, this plugin for you
 To use these shortcodes, just place the required shortcode(s) on your desired location.
 
   * Calender Shortcode [event_calender]
+  * Events Listing [events_list] or [events_list number="9" column="4"]
 
 
 = Features =
@@ -70,6 +71,10 @@ A. Found a bug? Please let us know by posting on the support section of this plu
 
 
 == Changelog ==
+
+= 1.0.3 [10/04/2021] =
+* Fixed: Bug Fixed.
+* Added: Events Listing Shortcode.
 
 = 1.0.2 [08/08/2020] =
 * Fixed: Bug Fixed.
