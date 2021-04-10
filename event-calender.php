@@ -2,8 +2,8 @@
 /*
 * Plugin Name:       Digital Events Calendar
 * Plugin URI:        https://demo.rejuandev.live/event-calender/
-* Description:       Event Calender is a all events calender listing.
-* Version:           1.0.1
+* Description:       Digital Events Calendar is an extensible plugin that lets you easily manage events by the calendar. Nice. Solid. Awesome. This will blow your mind.
+* Version:           1.0.3
 * Author:            Rejuan Ahamed
 * Author URI:        https://rejuandev.live/
 * Text Domain:       event-calender
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'DEC_FILE', __FILE__ );
-define( 'DEC_VERSION', '1.0.1' );
+define( 'DEC_VERSION', '1.0.3' );
 define( 'DEC_URI', plugin_dir_url( DEC_FILE ) ); 
 define( 'DEC_DIR_PATH', plugin_dir_path( DEC_FILE  ));
 define( 'DEC_PLUGIN_DIR', untrailingslashit( plugin_dir_path( DEC_FILE ) ) );

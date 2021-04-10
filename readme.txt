@@ -1,11 +1,11 @@
 === Digital Events Calendar ===
 
 Contributors: rejuancse
-Tags: WordPress Event Calendar, Event, Events, Calendar, Event Calendar
+Tags: WordPress Event Calendar, Event, Events, Calendar, Event Calendar, Calender
 Requires at least: 4.5
 Tested up to: 5.4
 Requires PHP: 5.4.0
-Stable tag:  1.0.1
+Stable tag:  1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,9 @@ A. Found a bug? Please let us know by posting on the support section of this plu
 
 
 == Changelog ==
+
+= 1.0.2 [08/08/2020] =
+* Fixed: Bug Fixed.
 
 = 1.0.1 [05/08/2020] =
 * Fixed: Data validation issue

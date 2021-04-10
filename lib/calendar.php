@@ -1,6 +1,6 @@
 <?php
 namespace DEC\lib;
-
+error_reporting(0);
 class Calendar_Shortcode { 
 
     /**
@@ -121,7 +121,6 @@ class Calendar_Shortcode {
                             endwhile; 
                         endif;
                         
-                        $get_final_array = preg_match('/value="(\d*)"/', $get_final_array, $get_newevarray);
                         $month_number1  = date("n",strtotime($get_final_array[1]));
                         $month_number2  = date("n",strtotime($get_final_array[4]));
                         $month_number3  = date("n",strtotime($get_final_array[7]));
