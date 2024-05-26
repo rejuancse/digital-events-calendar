@@ -51,18 +51,18 @@ class Events {
 		if (isset($_POST['event_start_date']) && ($_POST['event_start_date'] != '') ) {
 			$event_start_date = sanitize_text_field( $_POST['event_start_date'] );
 			update_post_meta($post_id, 'event_start_date', $event_start_date );
-		} 
+		}
 		if (isset($_POST['event_start_time']) && ($_POST['event_start_time'] != '') ) {
 			$event_start_time = sanitize_text_field( $_POST['event_start_time'] );
 			update_post_meta($post_id, 'event_start_time', $event_start_time );
-		} 
+		}
 
 		# Save End data.
 		if (isset($_POST['event_end_date']) && ($_POST['event_end_date'] != '')) {
 			$event_end_date = sanitize_text_field( $_POST['event_end_date'] );
 			update_post_meta($post_id, 'event_end_date', $event_end_date );
 		}
-		
+
 		if (isset($_POST['event_end_time']) && ($_POST['event_end_time'] != '')) {
 			update_post_meta($post_id, 'event_end_time', esc_html($_POST['event_end_time']));
 		}
@@ -77,5 +77,4 @@ class Events {
 
 	}
 	# End Save Function.
-	
 }

@@ -26,11 +26,11 @@ final class Events_Calender {
         add_action( 'wp_ajax_nopriv_edisplaynextmonth', array( $this, 'event_display_nextmonth' ) );
 	}
 
-	# Custom css style. 
+	# Custom css style.
 	public function style_custom_css() {
 		require_once DEC_DIR_PATH.'includes/compatibility/Admin_Menu.php';
 	}
-	
+
 	# Include Shortcode
 	public function include_shortcode() {
 		include_once DEC_DIR_PATH.'shortcode/Calender.php';
@@ -52,9 +52,8 @@ final class Events_Calender {
 	        $nextmonth  = sanitize_text_field($_POST['nextmonth']);
 	        $nextyear   = (int) sanitize_text_field($_POST['nextyear']);
 
-    		echo $calendar_shortcode->showCalender( $nextmonth, $nextyear ); 
-	    } 
+    		echo $calendar_shortcode->showCalender( $nextmonth, $nextyear );
+	    }
 	    wp_die();
 	}
-	
 }

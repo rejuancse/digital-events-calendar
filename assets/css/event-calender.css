@@ -573,7 +573,7 @@ button{
   font-size: 1rem;
   color:#666666;
   background:   #ffffff;
-  border:1px solid #666666;  
+  border:1px solid #666666;
 }
 
 button:hover{
@@ -941,8 +941,8 @@ span.round-circle{
   height: 100%;
   border-radius: 50%;
   content: '';
-  -webkit-box-sizing: content-box; 
-  -moz-box-sizing: content-box; 
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
   box-sizing: content-box;
 }
 
@@ -1557,7 +1557,7 @@ span.round-circle{
   66% {
     transform: translateY(8px); }
   100% {
-    transform: translateY(0px); } 
+    transform: translateY(0px); }
 }
 
 /* Eventco Menu */
@@ -2438,7 +2438,7 @@ h3.speaker-name {
     padding: 20px 30px 22px;
     transition: .3s;
 }
-.speaker-addon-wrapper:hover .speaker-details { 
+.speaker-addon-wrapper:hover .speaker-details {
     background-color: #1dbf73;
 }
 
@@ -2475,9 +2475,9 @@ h3.speaker-name {
 }
 
 .ecalendar-ecalendar-speakers .yes-gutters .speaker-addon-wrapper,
-.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(2) .speaker-addon-wrapper, 
-.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(4) .speaker-addon-wrapper, 
-.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(6) .speaker-addon-wrapper, 
+.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(2) .speaker-addon-wrapper,
+.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(4) .speaker-addon-wrapper,
+.ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(6) .speaker-addon-wrapper,
 .ecalendar-ecalendar-speakers .yes-gutters .speakers:nth-child(8) .speaker-addon-wrapper{
     background: transparent;
 }
@@ -2705,7 +2705,7 @@ section.ecalendar-event-wrapper.event_style2 {
     -webkit-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
     opacity: .3;
-    
+
 }
 .sponsor-img:hover {
     border: solid 1px #1dbf73;
@@ -2714,7 +2714,7 @@ section.ecalendar-event-wrapper.event_style2 {
     -webkit-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
     opacity: 1;
-    
+
 }
 .sponsor-img.sponsor-col-3 {
     padding: 38px 95px;
@@ -2961,7 +2961,7 @@ section.ecalendar-search-wrapper {
 }
 .single-filter {
     width: 42.5%;
-    float: left; 
+    float: left;
 }
 
 .ecalendar-search button.event-search-btn {
@@ -2982,7 +2982,7 @@ button.event-search-btn:hover {
     border-color: transparent;
 }
 
-.ecalendar-search .postform, 
+.ecalendar-search .postform,
 .ecalendar-search select#post_status,
 .ecalendar-search input#search {
     width: 93%;
@@ -2999,7 +2999,7 @@ button.event-search-btn:hover {
     color: #1dbf73;
 }
 .ecalendar-event-wrapper .search-error-title {
-     margin: 0px; 
+     margin: 0px;
 }
 .ecalendar-event-wrapper .goback {
     display: block;
@@ -3162,9 +3162,9 @@ nav.ecalendar-pagination {
 .schedule-style-four .event-schedule-tab-view ul li a.active {
     background: transparent;
 }
-.schedule-style-four .event-schedule-tab-view ul li.active a span, 
+.schedule-style-four .event-schedule-tab-view ul li.active a span,
 .schedule-style-four .event-schedule-tab-view ul li.active a p,
-.schedule-style-four .event-schedule-tab-view ul li a.active span, 
+.schedule-style-four .event-schedule-tab-view ul li a.active span,
 .schedule-style-four .event-schedule-tab-view ul li a.active p {
     color: #1dbf73;
 }
@@ -3270,25 +3270,25 @@ nav.ecalendar-pagination {
 }
 .container .row .col-md-4 {
     width: 33.33%;
-    float: left;   
+    float: left;
     padding-left: 15px;
     padding-right: 15px;
 }
 .container .row .col-md-3 {
     width: 25%;
-    float: left;   
+    float: left;
     padding-left: 15px;
     padding-right: 15px;
 }
 .container .row .col-md-2 {
     width: 50%;
-    float: left;   
+    float: left;
     padding-left: 15px;
     padding-right: 15px;
 }
 .container .row .col-md-4 {
     width: 33.33%;
-    float: left;   
+    float: left;
     padding-left: 15px;
     padding-right: 15px;
 }

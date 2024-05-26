@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $style = '';
 
@@ -16,7 +16,6 @@ if( $major_color ){
 	$style .= '.calendar ul li, .upcoming-events h2.main-head-event, .event-date .event-intro .event-content h2 a, .upcoming-events .head-area .btn {
 	    color: '.$major_color.';
 	}';
-
 }
 
 $output = '<style type="text/css"> '.$style.' </style>';

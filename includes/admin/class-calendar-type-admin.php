@@ -24,6 +24,8 @@ class Digital_Event_Calendar_Admin {
 	 */
 	private static $instance = null;
 
+	public $settings_page;
+
 	/**
 	* Allows for accessing single instance of class. Class should only be constructed once per call.
 	*
@@ -56,7 +58,6 @@ class Digital_Event_Calendar_Admin {
 	public function admin_menu() {
 		add_submenu_page( 'edit.php?post_type=event', __( 'Settings', 'digital-event-calendar' ), __( 'Settings', 'digital-event-calendar' ), 'manage_options', 'digital-event-calendar-settings', [ $this->settings_page, 'output' ] );
 	}
-
 }
 
 Digital_Event_Calendar_Admin::instance();

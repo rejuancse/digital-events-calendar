@@ -30,6 +30,8 @@ class Digital_Event_Calendar_Settings {
 	 */
 	protected $settings = [];
 
+	public string $settings_group;
+
 	/**
 	 * Allows for accessing single instance of class. Class should only be constructed once per call.
 	 *
@@ -90,7 +92,7 @@ class Digital_Event_Calendar_Settings {
 				# Event style
 				'event_style' => [
 					__( 'Calender Style', 'event-calender' ),
-					[	
+					[
 						[
 							'name'       => 'event_major_color',
 							'type'      => 'text',
@@ -119,12 +121,12 @@ class Digital_Event_Calendar_Settings {
 						],
 					],
 				],
-				
-			]
-		); 	
 
-		
- 	
+			]
+		);
+
+
+
 	}
 
 	/**
@@ -414,5 +416,4 @@ class Digital_Event_Calendar_Settings {
 		}
 		echo '</td></tr>';
 	}
-
 }

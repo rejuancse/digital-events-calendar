@@ -19,4 +19,3 @@
 	<label for="product_name"><?php echo esc_html__('Event Location: ', 'event-calender') ?></label>
 	<input id="event_location" type="text" name="event_location" value="<?php echo $event_location; ?>">
 </p>
-

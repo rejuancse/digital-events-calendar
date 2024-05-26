@@ -12,6 +12,9 @@ class Digital_Event_Calendar {
 		}
 		return self::$instance;
 	}
+
+	public $post_types;
+
 	/**
 	* Constructor.
 	*/
@@ -21,12 +24,12 @@ class Digital_Event_Calendar {
 
 		if ( is_admin() ) {
 			include_once DEC_PLUGIN_DIR . '/includes/admin/class-calendar-type-admin.php';
-		} 
+		}
 
 		# Init Classes
 		$this->post_types = DEC_Post_Types::instance();
-		
-		add_action('admin_enqueue_scripts', 	array($this, 'admin_script')); 
+
+		add_action('admin_enqueue_scripts', 	array($this, 'admin_script'));
 		add_action('wp_enqueue_scripts', 		array($this, 'frontend_scripts'));
 		add_action( 'after_switch_theme', [ $this->post_types, 'register_post_types' ], 11 );
 	}
@@ -45,15 +48,15 @@ class Digital_Event_Calendar {
 	    wp_enqueue_script('event-main', DEC_URI.'assets/js/main.js',array(),false,true);
 	    # For Ajax URL
 	    wp_enqueue_script( 'event-main' );
-	    wp_localize_script( 'event-main', 'eajax_objects', array( 
+	    wp_localize_script( 'event-main', 'eajax_objects', array(
 	    		'ajaxurl' 			=> admin_url( 'admin-ajax.php' ),
 	    		'ajax_nonce' 		=> wp_create_nonce('event-calendar-nonce')
-	    	) 
-	    );  
+	    	)
+	    );
 	}
 
-	public function admin_script() {   
-      	wp_enqueue_style( 'wp-color-picker' ); 
+	public function admin_script() {
+      	wp_enqueue_style( 'wp-color-picker' );
       	wp_enqueue_style('admin', DEC_URI .'assets/css/admin.css');
 
 		wp_enqueue_script( 'calender-admin', DEC_URI .'assets/js/admin.js', array('jquery', 'wp-color-picker'), '', true );
@@ -84,5 +87,4 @@ class Digital_Event_Calendar {
                 break;
         }
     }
-	
 }
