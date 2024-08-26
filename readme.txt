@@ -1,36 +1,49 @@
 === Digital Events Calendar ===
 
 Contributors: rejuancse
-Tags: Calendar, Event Calendar, Event, Schedule
+Tags: calendar, event calendar, events, schedule, event listing
 Requires at least: 5.9
-Tested up to: 6.1
+Tested up to: 6.6.1
 Requires PHP: 7.2
-Stable tag:  1.0.6
+Stable tag:  1.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Digital Events Calendar is an extensible plugin that lets you easily manage events by the calendar. Nice. Solid. Awesome. This will blow your mind.
+The Digital Events Calendar plugin for WordPress simplifies event management with an intuitive calendar view. Easily display and access upcoming and past events, perfect for showcasing events on any website.
 
 == Description ==
-If you want to build event calender in your wordpress theme, this plugin for you.
+Digital Events Calendar is the ultimate solution for managing and showcasing events on your WordPress site. With our plugin, users can easily browse upcoming events, view past events, and navigate through an intuitive calendar. Perfect for businesses, organizations, and individuals who want a seamless way to display their events online. Keep your audience informed and engaged with a clean, user-friendly interface and powerful features. Enhance your website today with the Digital Events Calendar plugin!
+
+== Features ==
+
+1. Upcoming Events Display: Showcase a list of all your upcoming events in a clean and organized format, allowing users to easily see what's happening next.
+
+2. Past Events Archive: Maintain a record of past events that users can browse through, providing a complete history of your events.
+
+3. Interactive Calendar View: Offer a visually appealing calendar view where users can see events by day, week, or month, making it easy to find events at a glance.
+
+4. Event Categories and Tags: Categorize and tag events for easy filtering and searching, allowing users to find events that match their interests quickly.
+
+5. Responsive Design: Ensure your events look great on all devices with a fully responsive design that adapts to desktops, tablets, and smartphones.
+
+6. Event Search and Filtering: Allow users to search for specific events and filter them by categories, tags, or dates, enhancing the user experience.
+
+7. Calendar Shortcodes: Easily embed your event calendar on any page or post using shortcodes, providing flexibility in how you display events on your site.
+
+8. SEO Optimized: Built with SEO best practices in mind to help your events get discovered more easily in search engines.
+
+9. Easy Setup and Management: User-friendly interface for quick setup and easy management of events, with no coding required.
+
+10. Global Settings
 
 
-= Shortcode List =
+== Shortcode List ==
 To use these shortcodes, just place the required shortcode(s) on your desired location.
 
-  * Calender Shortcode [event_calender]
-  * Events Listing [events_list] or [events_list number="9" column="4"]
-
-
-= Features =
-
-1. Demo
-2. Global Settings
-3. Calender for event with short description.
-
-
-Please let us know your feedback, if you think something can be more awesome in this plugin, we will love to add.
-
+* Calender Shortcode [event_calender]
+* Events Listing [events_list] or [events_list number="9" column="4"]
+* UpComing Events [upcoming_events_list] or [upcoming_events_list number="9" column="4"]
+* Past Events Listing [past_events_list] or [past_events_list number="9" column="4"]
 
 == Installation ==
 

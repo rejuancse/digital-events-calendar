@@ -1,20 +1,18 @@
 <?php
 /*
-* Plugin Name:       Digital Events Calendar
-* Description:       Digital Events Calendar is an extensible plugin that lets you easily manage events by the calendar. Nice. Solid. Awesome. This will blow your mind.
-* Author:            Rejuan Ahamed
-* Text Domain:       event-calender
-* Version:           1.0.6
+* Plugin Name: Digital Events Calendar
+* Description: The Digital Events Calendar plugin for WordPress simplifies event management with an intuitive calendar view. Easily display and access upcoming and past events, perfect for showcasing events on any website.
+* Author: Rejuan Ahamed
+* Text Domain: event-calender
+* Version: 1.0.6
 * Requires at least: 5.9
-* Tested up to:      6.1
-* License:           GPL-2.0+
-* License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
-* Domain Path:       /languages
+* Tested up to: 6.6.1
+* License: GPL-2.0+
+* License URI: http://www.gnu.org/licenses/gpl-2.0.txt
+* Domain Path: /languages
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; # Exit if accessed directly
-}
+defined( 'ABSPATH' ) || exit;
 
 define( 'DEC_FILE', __FILE__ );
 define( 'DEC_VERSION', '1.0.6' );
