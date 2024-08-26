@@ -108,7 +108,6 @@ class Digital_Event_Calendar_Settings {
 					[
 						[
 							'name'  	=> 'shortcode_list_page_id',
-							// 'std'   	=> '[event_calender]',
 							'desc'      => __( '[event_calender]', 'event-calender' ),
 							'label' 	=> __( 'Event Calendar', 'event-calender' ),
 							'type'  	=> '',
@@ -119,6 +118,18 @@ class Digital_Event_Calendar_Settings {
 							'label' 	=> __( 'Event Listing', 'event-calender' ),
 							'type'  	=> '',
 						],
+						[
+							'name'  	=> 'shortcode_list_page_id',
+							'desc'      => __( '[upcoming_events_list] or [upcoming_events_list number="9" column="4"]', 'event-calender' ),
+							'label' 	=> __( 'Upcoming Event Listing', 'event-calender' ),
+							'type'  	=> '',
+						],
+						[
+							'name'  	=> 'shortcode_list_page_id',
+							'desc'      => __( '[past_events_list] or [past_events_list number="9" column="4"]', 'event-calender' ),
+							'label' 	=> __( 'Past Event Listing', 'event-calender' ),
+							'type'  	=> '',
+						]
 					],
 				],
 

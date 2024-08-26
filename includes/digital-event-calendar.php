@@ -41,6 +41,7 @@ class Digital_Event_Calendar {
 	public function frontend_scripts() {
 	    # CSS
 	    wp_enqueue_style('event-calender', DEC_URI .'assets/css/event-calender.css');
+	    wp_enqueue_style('bootstrap-grid', DEC_URI .'assets/css/bootstrap-grid.min.css');
 	    wp_enqueue_style('event-main', DEC_URI .'assets/css/main.css');
 
 	    # JS

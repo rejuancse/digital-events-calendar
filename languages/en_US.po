@@ -173,13 +173,6 @@ msgid "Event submitted. <a target=\"_blank\" href=\"%s\">Preview Event</a>"
 msgstr ""
 
 #: includes/class-event-post-types.php:107
-#, php-format
-msgid ""
-"Event scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s"
-"\">Preview Event</a>"
-msgstr ""
-
-#: includes/class-event-post-types.php:107
 msgid "M j, Y @ G:i"
 msgstr ""
 

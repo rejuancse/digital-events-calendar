@@ -34,10 +34,14 @@ final class Events_Calender {
 	# Include Shortcode
 	public function include_shortcode() {
 		include_once DEC_DIR_PATH.'shortcode/Calender.php';
-		include_once DEC_DIR_PATH.'shortcode/Events-List.php';
+		include_once DEC_DIR_PATH.'shortcode/Events_List.php';
+		include_once DEC_DIR_PATH.'shortcode/Upcoming_Events.php';
+		include_once DEC_DIR_PATH.'shortcode/Past_Events.php';
 
 		$dec_calender 	= new \DEC\shortcode\Calendar();
 		$event_listing 	= new \DEC\shortcode\Event_Listing();
+		$upcoming_events 	= new \DEC\shortcode\Upcoming_Events();
+		$past_events 	= new \DEC\shortcode\Past_Events();
 
 		# require file for compatibility
 		require_once DEC_DIR_PATH.'includes/compatibility/Shortcodes.php';

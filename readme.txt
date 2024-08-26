@@ -20,21 +20,17 @@ Digital Events Calendar is the ultimate solution for managing and showcasing eve
 
 2. Past Events Archive: Maintain a record of past events that users can browse through, providing a complete history of your events.
 
-3. Interactive Calendar View: Offer a visually appealing calendar view where users can see events by day, week, or month, making it easy to find events at a glance.
+3. Interactive Calendar View: Offer a visually appealing calendar view where users can see events by month making it easy to find events at a glance.
 
-4. Event Categories and Tags: Categorize and tag events for easy filtering and searching, allowing users to find events that match their interests quickly.
+4. Event Categories: Categorize and tag events for easy filtering and searching, allowing users to find events that match their interests quickly.
 
 5. Responsive Design: Ensure your events look great on all devices with a fully responsive design that adapts to desktops, tablets, and smartphones.
 
-6. Event Search and Filtering: Allow users to search for specific events and filter them by categories, tags, or dates, enhancing the user experience.
+6. Calendar Shortcodes: Easily embed your event calendar on any page or post using shortcodes, providing flexibility in how you display events on your site.
 
-7. Calendar Shortcodes: Easily embed your event calendar on any page or post using shortcodes, providing flexibility in how you display events on your site.
+7. Easy Setup and Management: User-friendly interface for quick setup and easy management of events, with no coding required.
 
-8. SEO Optimized: Built with SEO best practices in mind to help your events get discovered more easily in search engines.
-
-9. Easy Setup and Management: User-friendly interface for quick setup and easy management of events, with no coding required.
-
-10. Global Settings
+8. Global Settings
 
 
 == Shortcode List ==
@@ -84,6 +80,11 @@ A. Found a bug? Please let us know by posting on the support section of this plu
 
 
 == Changelog ==
+= 1.0.7 [26/08/2024] =
+* Fixed: CSS issue fixed
+* UpComing Events listing added
+* Past Events Listing added
+
 = 1.0.6 [27/05/2024] =
 * Fixed: Deprecated: Creation of dynamic property issue fixed
 
